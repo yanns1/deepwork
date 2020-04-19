@@ -84,15 +84,9 @@ function Chrono({
         // Pour éviter cette erreur: DOMException: The play() request was interrupted
         const playPromise = congratulations.play();
         if (playPromise !== undefined) {
-            playPromise
-                .then(() => {
-                    window.addEventListener('keydown', () => {
-                        congratulations.pause();
-                    });
-                })
-                .catch(err => {
-                    console.error(`Error during loading of congratulations-music` + err)
-                });
+            playPromise.catch(err => {
+                console.error(`Error during loading of congratulations-music` + err)
+            })
         }
     }
 
@@ -196,9 +190,6 @@ function Chrono({
 
         return function cleanup() {
             clearTimeout(id)
-            window.removeEventListener('keydown', () => {
-                congratulations.pause();
-            })
         }
     }, [secondsLeft, isPaused]);
 
