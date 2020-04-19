@@ -34,7 +34,13 @@ function Music() {
         <div className={theme === 'dark' ? `music ${theme}` : 'music'}>
             <video className="congratulations-music" src={congratulationsMusic} style={{display: 'none'}}></video>
             <div className="audio-wrapper">
-                <h5 className="audio-title">Concentration music (default)</h5>
+                <h5 className="audio-title">
+                    Concentration music (default)
+                    <div id="hint" className="icon material-icons">info</div>
+                    <div className="mdl-tooltip" data-mdl-for="hint">
+                        Press "1" for playing/pausing
+                    </div>
+                </h5>
                 <audio className="concentration-music" src={concentrationMusic} controls>
                     Impossible de lire la vidéo ! Lien ytb:
                     https://www.youtube.com/watch?v=KNuoGeD9Qeo&t=3s
