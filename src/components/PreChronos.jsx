@@ -239,10 +239,10 @@ function PreChronos({
 
             <h5 className="pre-chronos-title">
                 Save time by creating your chronos in advance !
-          <div id="info" className="icon material-icons">info</div>
-                <div className="mdl-tooltip" data-mdl-for="info">
-                    5 max
-          </div>
+                <div id="info" className="icon material-icons">info</div>
+                        <div className="mdl-tooltip" data-mdl-for="info">
+                            5 max
+                </div>
             </h5>
 
             <form className="pre-chronos-form" action="" onSubmit={pushPrechronoToDb}>
@@ -407,7 +407,7 @@ function PreChronos({
                 </div>
             </form>
 
-            <div className="pre-chronos-chips" onClick={handleClick}>
+            <div className={theme === 'dark' ? "pre-chronos-chips dark" : "pre-chronos-chips"} onClick={handleClick}>
                 {prechronos
                     ? prechronos.map(createChip)
                     : null

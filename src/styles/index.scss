@@ -243,6 +243,10 @@ main {
       background: rgba(46, 46, 46, 0.2);
     }
   }
+
+  &.dark > .pre-chronos-chip:hover {
+    background: rgba(255, 255, 255, 0.45);
+  }
 }
 
 .stats-title {
