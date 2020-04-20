@@ -72,7 +72,6 @@ function Display({ secondsLeft }) {
     return (
         <>
             <h2 className="chrono-text">{chronoText}</h2>
-            <h2 className="chrono-text">{secondsLeft}</h2>
         </>
     )
 }
