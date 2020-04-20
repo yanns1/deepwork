@@ -8,6 +8,10 @@ import congratulationsMusic from '../videos/congratulations.mp3';
  * @requires react (useState, useContext)
  */
 function Music() {
+    // Contexts
+    const { isDarkTheme } = useContext(ThemeContext);
+
+    // States
     const [videoUrl, setVideoUrl] = useState('');
     const [iframeUrl, setIframeUrl] = useState('');
 
@@ -26,12 +30,10 @@ function Music() {
     const iframeStyles = {
         width: '70%',
         height: '40vh'
-    };
-
-    const { theme } = useContext(ThemeContext);
+    }
 
     return (
-        <div className={theme === 'dark' ? `music ${theme}` : 'music'}>
+        <div className={isDarkTheme ? 'dark music' : 'music'}>
             <video className="congratulations-music" src={congratulationsMusic} style={{display: 'none'}}></video>
             <div className="audio-wrapper">
                 <h5 className="audio-title">

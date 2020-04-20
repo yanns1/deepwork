@@ -8,12 +8,12 @@ import { AuthContext } from '../context/AuthContext.jsx'
  */
 function Message() {
     // Contexts
-    const { theme } = useContext(ThemeContext);
+    const { isDarkTheme } = useContext(ThemeContext);
     const { userCred } = useContext(AuthContext)
 
     if (userCred) return null
     return (
-        <div className={theme === 'dark' ? "header-message dark" : "header-message"}>Log in to make prechronos and record the time you passed in a "deep mode"!</div>
+        <div className={isDarkTheme ? "header-message dark" : "header-message"}>Log in to make prechronos and record the time you passed in a "deep mode"!</div>
     )
 }
 

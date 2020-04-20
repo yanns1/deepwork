@@ -78,15 +78,14 @@ function Stats() {
      * Listen to stats from database and set state accordingly
      */
     function getStats() {
-        if (!userCred) return
-
-        const usersDocRef = db.collection('users').doc(userCred.uid)
-        usersDocRef.onSnapshot(doc => {
-            // Create Map obj to ensure insertion order
-            const stats = objToMap(doc.data().stats)
-            setStats(() => stats)
-        })
-
+        if (userCred) {
+            const usersDocRef = db.collection('users').doc(userCred.uid)
+            usersDocRef.onSnapshot(doc => {
+                // Create Map obj to ensure insertion order
+                const stats = objToMap(doc.data().stats)
+                setStats(() => stats)
+            })
+        }
     }
 
     /**

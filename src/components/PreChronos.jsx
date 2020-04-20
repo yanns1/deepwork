@@ -17,7 +17,7 @@ function PreChronos({
     const [prechronos, setPrechronos] = useState(null)
 
     // Contexts
-    const { theme } = useContext(ThemeContext);
+    const { isDarkTheme } = useContext(ThemeContext);
     const { userCred } = useContext(AuthContext);
 
     /**
@@ -235,7 +235,7 @@ function PreChronos({
 
     if (!userCred) return null
     return (
-        <div className={theme === 'dark' ? "pre-chronos dark" : "pre-chronos"}>
+        <div className={isDarkTheme ? "pre-chronos dark" : "pre-chronos"}>
 
             <h5 className="pre-chronos-title">
                 Save time by creating your chronos in advance !
@@ -407,7 +407,7 @@ function PreChronos({
                 </div>
             </form>
 
-            <div className={theme === 'dark' ? "pre-chronos-chips dark" : "pre-chronos-chips"} onClick={handleClick}>
+            <div className={isDarkTheme ? "pre-chronos-chips dark" : "pre-chronos-chips"} onClick={handleClick}>
                 {prechronos
                     ? prechronos.map(createChip)
                     : null

@@ -7,13 +7,13 @@ import ThemeToggle from './ThemeToggle.jsx';
 
 
 function Header() {
-    const { theme } = useContext(ThemeContext);
+    const { isDarkTheme } = useContext(ThemeContext);
 
     return (
         <header>
             <div className="header-subcontainer">
                 <Dialogs />
-                <a className={theme === 'dark' ? "title dark" : "title"} href="/index.html">Deep Work</a>
+                <a className={isDarkTheme ? "title dark" : "title"} href="/index.html">Deep Work</a>
                 <Navbar />
             </div>
             <Message />

@@ -1,41 +1,40 @@
-import React, { useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext.jsx';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react'
+import { AuthContext } from '../context/AuthContext.jsx'
+import { ThemeContext } from '../context/ThemeContext.jsx'
 
 /**
  * Component returning theme icon with the ability to toggle theme when click on it
  */
 function ThemeToggle() {
-    const { theme, toggleTheme } = useContext(ThemeContext);
+    // Contexts
+    const { userCred } = useContext(AuthContext);
+    const { isDarkTheme, toggleTheme } = useContext(ThemeContext);
 
     // Add or remove 'dark' class to body
     const body = document.querySelector('body');
-    theme === 'dark' ? body.classList.add('dark') : body.classList.remove('dark');
+    isDarkTheme ? body.classList.add('dark') : body.classList.remove('dark');
 
     function handleClick(e) {
         if (e.target.dataset.role === 'toggleTheme') {
-            toggleTheme();
+            // Update db
+            if (userCred) {
+                const userDocRef = db.collection("users").doc(userCred.uid)
+                const updatedTheme = isDarkTheme
+                    ? { isDarkTheme: false }
+                    : { isDarkTheme: true }
+                userDocRef.update(updatedTheme)
+                    .catch(err => {
+                        console.error(`Error during updating theme in db: ${err}`)
+                    })
+            } else {
+                toggleTheme()
+            }
         }
     }
 
     return (
         <div className="theme">
             <i className="material-icons theme-icon" data-role="toggleTheme" onClick={handleClick} title="Change the theme">brightness_medium</i>
-            {/* <div className="theme-checkbox">
-                <label
-                    className="theme-checkbox_label mdl-switch mdl-js-switch mdl-js-ripple-effect"
-                >
-                    <input
-                        type="checkbox"
-                        id="theme"
-                        name="theme"
-                        className="mdl-switch__input"
-                        onChange={handleChange}
-                        checked={theme === 'dark' ? true : false}
-                    />
-                    <span className="mdl-switch__label"></span>
-                </label>
-            </div> */}
         </div>
     )
 }
