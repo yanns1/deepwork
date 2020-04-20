@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-import PropTypes from 'prop-types';
 import { ThemeContext } from './context/ThemeContext.jsx';
 import { AuthContext } from './context/AuthContext.jsx';
 
