@@ -1,7 +1,9 @@
 import React, { useContext } from 'react'
-import PropTypes from 'prop-types';
+import { AuthContext } from '../context/AuthContext.jsx'
 
 function Dialogs() {
+    // Contexts
+    const { userCred } = useContext(AuthContext)
 
     async function signUp(e) {
         e.preventDefault();
@@ -14,7 +16,7 @@ function Dialogs() {
         // sign up user
         auth.createUserWithEmailAndPassword(email, password)
             .then(cred => {
-                closeDialog()
+                closeDialogs()
                 // Initialize document in db for user
                 db.collection('users').doc(cred.user.uid).set({
                     "pre-chronos": [],
@@ -34,18 +36,18 @@ function Dialogs() {
 
     function logIn(e) {
         e.preventDefault();
+
         const loginForm = document.querySelector('.login-form');
 
         // get inputs
         const email = loginForm['login-email'].value;
         const password = loginForm['login-pwd'].value;
-        console.log(email, password)
 
         // log in user
         auth.signInWithEmailAndPassword(email, password)
-            .then(credentials => {
+            .then(cred => {
                 // close modal and reset form
-                closeDialog();
+                closeDialogs();
             })
             .catch(err => {
                 const loginErrorMessage = document.querySelector('.login-error-message');
@@ -55,7 +57,7 @@ function Dialogs() {
             });
     }
 
-    function closeDialog() {
+    function closeDialogs() {
         // Because 2 differents dialogs, close the 2 each time instead of trying to know which one is open
 
         // Empty error message div
@@ -79,6 +81,7 @@ function Dialogs() {
         loginForm.reset();
     }
 
+    if (userCred) return null
     return (
         <>
             <dialog className="signup-dialog mdl-dialog">
@@ -114,7 +117,7 @@ function Dialogs() {
                             <button
                                 className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
                                 type="button"
-                                onClick={closeDialog}
+                                onClick={closeDialogs}
                             >
                                 Cancel
                             </button>
@@ -161,7 +164,7 @@ function Dialogs() {
                             <button
                                 className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
                                 type="button"
-                                onClick={closeDialog}
+                                onClick={closeDialogs}
                             >
                                 Cancel
                             </button>
