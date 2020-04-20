@@ -22,6 +22,14 @@ function Navbar() {
         loginDialog.showModal();
     }
 
+    function showAccountDialog() {
+        const accountDialog = document.querySelector('.account-dialog');
+        if (!accountDialog.showModal) {
+            dialogPolyfill.registerDialog(accountDialog);
+        }
+        accountDialog.showModal();
+    }
+
     function signOut() {
         auth.signOut();
     }
@@ -30,7 +38,10 @@ function Navbar() {
         <nav className="navbar">
             {userCred
                 ?
-                <li className="nav-links logout-link" onClick={signOut}>Log out</li>
+                <>
+                    <li className="nav-links logout-link" onClick={signOut}>Log out</li>
+                    <i className="material-icons account-icon" onClick={showAccountDialog} title="Account infos">account_circle</i>
+                </>
                 :
                 <>
                     <li className="nav-links signup-link" onClick={showSignupDialog}>Sign up</li>

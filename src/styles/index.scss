@@ -26,6 +26,8 @@ body.dark {
 .navbar {
   display: flex;
   align-self: center;
+  align-items: center;
+  margin: 1rem 2rem;
 }
 
 .nav-links {
@@ -37,6 +39,11 @@ body.dark {
   &:hover {
     transform: scale(1.1);
   }
+}
+
+.account-icon {
+  margin: 0 1rem;
+  padding: 0.5rem 0.5rem;
 }
 
 .mdl-dialog__actions {
@@ -51,13 +58,6 @@ body.dark {
   color: red;
 }
 
-.logout-info {
-  display: none;
-  border-radius: 8px;
-  padding: 0.5rem 0.5rem;
-  background: rgba(201, 111, 111, 0.2);
-  color: rgba(255, 0, 0, 0.6);
-}
 .title {
   font-family: "Avant Garde", "Century Gothic", "AppleGothic", sans-serif;
   font-size: 2rem;
