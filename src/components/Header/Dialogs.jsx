@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { AuthContext } from '../context/AuthContext.jsx'
 
 function Dialogs() {
@@ -82,6 +82,11 @@ function Dialogs() {
         const accountDialog = document.querySelector('.account-dialog');
         accountDialog.close();
     }
+
+    // Upgrade DOM at each render to maintain styling of MDL elements
+    useEffect(() => {
+        componentHandler.upgradeDom()
+    })
 
     return (
         <>

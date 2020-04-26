@@ -183,6 +183,11 @@ const Stats = () => {
         createChart(labels, data)
     }, [stats])
 
+    // Upgrade DOM at each render to maintain styling of MDL elements
+    useEffect(() => {
+        componentHandler.upgradeDom()
+    })
+
     if (!userCred) return null
     const checkboxesJsx = createDeleteCheckboxes(Array.from(stats.keys()))
     return (

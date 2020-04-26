@@ -239,6 +239,11 @@ const PreChronos = ({
         }
     }, [prechronos]);
 
+    // Upgrade DOM at each render to maintain styling of MDL elements
+    useEffect(() => {
+        componentHandler.upgradeDom()
+    })
+
     if (!userCred) return null
     return (
         <div className={isDarkTheme ? "pre-chronos dark" : "pre-chronos"}>
