@@ -239,6 +239,7 @@ function Chrono({
             />
             <Display
                 secondsLeft={secondsLeft}
+                chronoID={chronoID}
             />
             <Controls
                 label={label}

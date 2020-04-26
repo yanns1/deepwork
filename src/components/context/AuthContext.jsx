@@ -3,9 +3,9 @@ const AuthContext = React.createContext();
 
 /**
  * @file Initiates the authentification context
- * @requires react (useState)
+ * @requires react
  */
-function AuthContextProvider(props) {
+function AuthContextProvider({ children }) {
     const [userCred, setUserCred] = useState(null);
 
     auth.onAuthStateChanged(userCred => {
@@ -18,7 +18,7 @@ function AuthContextProvider(props) {
                 userCred
             }}
         >
-            {props.children}
+            {children}
         </AuthContext.Provider>
     )
 }

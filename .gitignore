@@ -3,3 +3,4 @@ notes
 /docs
 # Local Netlify folder
 .netlify
+/dist

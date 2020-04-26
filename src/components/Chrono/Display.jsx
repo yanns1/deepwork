@@ -1,14 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import congratulationsMusic from '../../videos/congratulations.mp3';
+import React from 'react'
 
 /**
  * @file Creates section where the chrono content is displayed
  * @requires react
  */
-function Display({ secondsLeft }) {
+const Display = ({
+    secondsLeft,
+    chronoID
+}) => {
 
-    function convertIntoHours(seconds) {
+    const convertIntoHours = (seconds) => {
         // Because of a problem unresolved, secondsLeft can have the value -1
         if (seconds < 0) {
             return {
@@ -25,7 +26,7 @@ function Display({ secondsLeft }) {
         return { hours, minutes, seconds: secondsLeft };
     }
 
-    function createChronoText({ hours, minutes, seconds }) {
+    const createChronoText = ({ hours, minutes, seconds }) => {
         const hoursText = hours ? `${hours}h` : '';
         let minutesText = '';
         let secondsText = '';
@@ -61,19 +62,19 @@ function Display({ secondsLeft }) {
         return hoursText + firstInterval + minutesText + secondInterval + secondsText;
     }
 
-    const chronoText = createChronoText(convertIntoHours(secondsLeft));
-    // Ca bug qd 2 chronos en marche mais sinon besoin d'identifier lequel a le temps restant le + faible, donc surement obligé de remonter au component Chronos.jsx...
-    if (chronoText === '0s') {
-        document.title = 'Deep Work';
-    } else {
-        document.title = chronoText;
-    }
 
+    const chronoText = createChronoText(convertIntoHours(secondsLeft))
+    // Set document title based on first chrono
+    if (chronoID === 'first') {
+        if (chronoText === '0s') {
+            document.title = 'Deep Work';
+        } else {
+            document.title = chronoText;
+        }
+    }
     return (
-        <>
-            <h2 className="chrono-text">{chronoText}</h2>
-        </>
+        <h2 className="chrono-text">{chronoText}</h2>
     )
 }
 
-export default Display;
+export default Display
