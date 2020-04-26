@@ -6,12 +6,12 @@ import { AuthContext } from './context/AuthContext.jsx';
  * @file Creates pre-chronos widgets and handle database updating related to them
  * @requires react (useState, useEffect, useContext)
  */
-function PreChronos({
+const PreChronos = ({
     setIsPreChronoClicked,
     setPreChronoSeconds,
     setPreChronoLabel,
     convertIntoSeconds
-}) {
+}) => {
     // States
     const [prechronos, setPrechronos] = useState(null)
 
@@ -62,7 +62,7 @@ function PreChronos({
      * @param {Object} prechrono Prechrono obj, i.e with keys hours, minutes and seconds
      * @returns {String} - Chrono text
      */
-    function createChronoText({ hours, minutes, seconds }) {
+    const createChronoText = ({ hours, minutes, seconds }) => {
         // stringToInt :: String -> Int || NaN
         const stringToInt = string => parseInt(string, 10)
         const [h, min, s] = [hours, minutes, seconds].map(stringToInt)
@@ -103,7 +103,7 @@ function PreChronos({
      * @param {Object} prechrono - Prechrono obj (from chipWrapper dataset)
      * @returns {void}
      */
-    function applyChip({ hours, minutes, seconds }) {
+    const applyChip = ({ hours, minutes, seconds }) => {
         // Ask for a label
         const label = window.prompt(`Choose your label:\n(Only lowercases and underscores are valid. Don't let white spaces ! If those conditions are not respected, the label will not be considered.)`)
 
@@ -131,7 +131,7 @@ function PreChronos({
      * @param {Object} prechrono - Prechrono obj (from chipWrapper dataset)
      * @returns {void}
      */
-    function deleteChip({ hours, minutes, seconds }) {
+    const deleteChip = ({ hours, minutes, seconds }) => {
         const userDocRef = db.collection("users").doc(userCred.uid)
         db.runTransaction(transaction => {
             return transaction.get(userDocRef).then(userDoc => {
@@ -151,7 +151,7 @@ function PreChronos({
      * Push Prechrono obj to database when user submits, i.e when clicks on CREATE button
      * @param {Object} e - Event object
      */
-    function pushPrechronoToDb(e) {
+    const pushPrechronoToDb = e => {
         e.preventDefault();
 
         const form = e.target
@@ -186,7 +186,7 @@ function PreChronos({
      * @param {Object} e - Event
      * @returns {void}
      */
-    function handleClick(e) {
+    const handleClick = e => {
         if (e.target.dataset.role === "deleteChip") {
             const chipWrapper = e.target.parentNode.parentNode;
             deleteChip(chipWrapper.dataset);
@@ -203,23 +203,30 @@ function PreChronos({
 
     /**
      * Listen to changes of prechronos in database and set state accordingly
+     * @function getPrechronos
+     * @returns {Object} - unsubscribe to listener function
      */
-    function getPrechronos() {
-        if (!userCred) return
-
+    const getPrechronos = () => {
         const usersDocRef = db.collection('users').doc(userCred.uid)
-        usersDocRef.onSnapshot(doc => {
-            // Create Map obj to ensure insertion order
+        const unsubscribe = usersDocRef.onSnapshot(doc => {
             const prechronos = doc.data()["pre-chronos"]
             setPrechronos(() => prechronos)
         })
+
+        return unsubscribe
     }
 
     /**
      * useEffect that get and set prechronos state when changes occur in database
      */
     useEffect(() => {
-        getPrechronos()
+        if (!userCred) return
+
+        const unsubscribe = getPrechronos()
+
+        return () => {
+            unsubscribe()
+        }
     }, [userCred])
 
     /**

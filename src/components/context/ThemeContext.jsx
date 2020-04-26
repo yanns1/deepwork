@@ -24,18 +24,23 @@ function ThemeContextProvider({ children }) {
      * Set listener for changes in db and set theme state accordingly to response.
      * (impure)
      * @function listenToTheme
-     * @returns {void}
+     * @returns {Object} - unsubscribe to listener function
      */
     const listenToTheme = () => {
         const usersDocRef = db.collection('users').doc(userCred.uid)
-        usersDocRef.onSnapshot(doc => {
+        const unsubscribe = usersDocRef.onSnapshot(doc => {
             setIsDarkTheme(() => doc.data().isDarkTheme)
         })
+        return unsubscribe
     }
 
     useEffect(() => {
-        if (userCred) {
-            listenToTheme()
+        if (!userCred) return
+
+        const unsubscribe = listenToTheme()
+
+        return () => {
+            unsubscribe()
         }
     }, [userCred])
 

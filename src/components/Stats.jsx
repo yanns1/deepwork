@@ -5,7 +5,7 @@ import { AuthContext } from './context/AuthContext.jsx'
  * @requires react
  */
 
-function Stats() {
+const Stats = () => {
     // Contexts
     const { userCred } = useContext(AuthContext)
 
@@ -17,7 +17,7 @@ function Stats() {
      */
     const [stats, setStats] = useState([])
 
-    function deleteLabelsInDb(e) {
+    const deleteLabelsInDb= e => {
         e.preventDefault()
         const form = e.target
 
@@ -76,16 +76,17 @@ function Stats() {
 
     /**
      * Listen to stats from database and set state accordingly
+     * @function getStats
+     * @returns {Object} - unsubscribe to listener function
      */
-    function getStats() {
-        if (userCred) {
-            const usersDocRef = db.collection('users').doc(userCred.uid)
-            usersDocRef.onSnapshot(doc => {
-                // Create Map obj to ensure insertion order
-                const stats = objToMap(doc.data().stats)
-                setStats(() => stats)
-            })
-        }
+    const getStats = () => {
+        const usersDocRef = db.collection('users').doc(userCred.uid)
+        const unsubscribe = usersDocRef.onSnapshot(doc => {
+            // Create Map obj to ensure insertion order
+            const stats = objToMap(doc.data().stats)
+            setStats(() => stats)
+        })
+        return unsubscribe
     }
 
     /**
@@ -93,7 +94,7 @@ function Stats() {
      * @param {array} labels - Labels of the chart
      * @param {array} data - Value of each label (labels[0] goes with data[0] etc)
      */
-    function createChart(labels, data) {
+    const createChart = (labels, data) => {
         if (userCred) {
             const canvas = document.querySelector('#chart');
             const ctx = canvas.getContext('2d');
@@ -143,7 +144,7 @@ function Stats() {
      * @param {array} labels - Labels for which checkboxes are made
      * @returns {array} - Each item is JSX for one checkbox
      */
-    function createDeleteCheckboxes(labels) {
+    const createDeleteCheckboxes = labels => {
         return labels.map(label =>
             <label key={label} className="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" htmlFor={label}>
                 <input type="checkbox" id={label} name={label} className="mdl-checkbox__input"/>
@@ -156,7 +157,13 @@ function Stats() {
      * useEffect that get and set stats state when changes occur in database
      */
     useEffect(() => {
-        getStats()
+        if (!userCred) return
+
+        const unsubscribe = getStats()
+
+        return () => {
+            unsubscribe()
+        }
     }, [userCred])
 
     /**
