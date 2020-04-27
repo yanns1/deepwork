@@ -11,7 +11,7 @@ function Header() {
 
     return (
         <header>
-            <div className="header-subcontainer">
+            <div className="subheader">
                 <Dialogs />
                 <a className={isDarkTheme ? "title dark" : "title"} href="/index.html">Deep Work</a>
                 <Navbar />

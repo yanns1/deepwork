@@ -1,13 +1,22 @@
 @import url("https://fonts.googleapis.com/css?family=Raleway&display=swap"); // Raleway font
 @import "./normalize.scss"; // normalize
 
+:root {
+  --side-padding: 2rem;
+  --clickableEl-margin: 0 1rem;
+  --clickableEl-padding: 0.5rem;
+  --opacity-before-hover: 0.75;
+}
+
 .html {
   box-sizing: border-box;
 }
 
-body.dark {
-  background: rgb(30, 34, 39);
-  color: #dddddd;
+body {
+  &.dark {
+    background: rgb(30, 34, 39);
+    color: #dddddd;
+  }
 }
 
 *,
@@ -18,26 +27,27 @@ body.dark {
   line-height: 1.4;
 }
 
-.header-subcontainer {
+.subheader {
   display: flex;
   justify-content: space-between;
+  padding: 2rem var(--side-padding);
 }
 
 .navbar {
   display: flex;
   align-self: center;
   align-items: center;
-  margin: 1rem 2rem;
 }
 
 .nav-links {
   cursor: pointer;
   list-style-type: none;
-  margin: 0 1rem;
-  padding: 0.5rem 0.5rem;
+  margin: var(--clickableEl-margin);
+  padding: var(--clickableEl-padding);
+  opacity: var(--opacity-before-hover);
 
   &:hover {
-    transform: scale(1.1);
+    opacity: 1;
   }
 }
 
@@ -46,8 +56,13 @@ body.dark {
 }
 
 .account-icon {
-  margin: 0 1rem;
-  padding: 0.5rem 0.5rem;
+  margin: var(--clickableEl-margin);
+  padding: var(--clickableEl-padding);
+  opacity: var(--opacity-before-hover);
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .mdl-dialog__actions {
@@ -72,8 +87,6 @@ body.dark {
   color: black;
   letter-spacing: 0.05em;
   text-shadow: 7px 7px 0px #d5d5d5, 4px 4px 0px rgba(0, 0, 0, 0.2);
-  padding: 1rem 1rem;
-  margin: 1rem 1rem;
 
   &.dark {
     color: rgb(223, 223, 223);
@@ -84,15 +97,15 @@ body.dark {
 .theme {
   display: flex;
   justify-content: flex-end;
-  margin: 1rem 2rem;
+  padding: 1rem var(--side-padding);
 }
 
 .theme-icon {
-  cursor: pointer;
-  padding: 0.2rem 0.2rem;
+  margin: var(--clickableEl-margin);
+  padding: var(--clickableEl-padding);
   display: flex;
   align-items: center;
-  opacity: 0.8;
+  opacity: var(--opacity-before-hover);
 
   &:hover {
     opacity: 1;
@@ -121,12 +134,15 @@ main {
 }
 
 .music {
+  // padding to expand background into
+  padding: 0 var(--side-padding);
   background: rgb(226, 226, 226);
 
   &.dark {
     background: rgba(139, 139, 139, 0.2);
   }
 }
+
 .audio-wrapper {
   flex: 1;
 
@@ -157,11 +173,12 @@ main {
 }
 
 .current-time {
+  padding: 0 var(--side-padding);
   text-align: center;
 }
 
 .chrono {
-  margin: 2rem 2rem;
+  padding: 2rem var(--side-padding);
 }
 
 .chrono-text {
@@ -204,10 +221,10 @@ main {
 }
 
 .pre-chronos {
-  padding: 2rem;
-  background: rgb(226, 226, 226);
-  width: 100%;
+  padding: 1rem var(--side-padding);
+  background-color: rgb(226, 226, 226);
 
+  // @todo déplacer jusytify stuff sur le content
   display: flex;
   flex-direction: column;
   justify-content: center;
