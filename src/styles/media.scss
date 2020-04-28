@@ -11,29 +11,9 @@
     border-left: solid 2px black;
   }
 
-  .stats {
-    margin: 2em auto;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-    color: black; // The text of the table inherit that color, which override the white when there's the dark mode.
-  }
-
   .stats_title.dark {
     color: #dddddd; // Keep the title white when we're in dark mode because otherwise it would be black because of the color black implemented on the table parent element (.stats)
   }
-}
-
-footer {
-  height: 10vh;
-  background: rgb(66, 66, 66);
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-}
-
-.footer-link {
-  padding: 0.5em 2em;
-  text-decoration: none;
-  color: inherit;
 }
 
 @media (min-width: 850px) {

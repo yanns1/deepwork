@@ -9,7 +9,7 @@ import { AuthContext } from '../context/AuthContext.jsx';
  * @file Creates a chrono container and manages all things related: database, congratulations_music
  * @requires react (useState, useEffect)
  */
-function Chrono({
+const Chrono = ({
     chronoID,
     isPreChronoClicked,
     preChronoSeconds,
@@ -18,7 +18,7 @@ function Chrono({
     convertIntoSeconds,
     isFirstChronoRunning,
     setIsFirstChronoRunning
-}) {
+}) => {
     // Contexts
     const { userCred } = useContext(AuthContext);
 
@@ -31,7 +31,7 @@ function Chrono({
     const [isFirstRender, setIsFirstRender] = useState(true);
 
 
-    async function isLabelNumLimitReached(labelToAdd) {
+    const isLabelNumLimitReached = async (labelToAdd) => {
         const limit = 5
         let isLimitReached = true
 
@@ -59,7 +59,7 @@ function Chrono({
      * @param {number} timeToAdd - Time in seconds to add to label
      * @returns {Object} - null if update is successfull. Error object otherwise.
      */
-    function updateStatsInDb(uid = userCred.uid, label, timeToAdd = 0) {
+    const updateStatsInDb = (uid = userCred.uid, label, timeToAdd = 0) => {
         const userDoc = db.collection('users').doc(uid)
         const keyToUpdate = `stats.${label}`
         const updatedStats = {
@@ -77,7 +77,7 @@ function Chrono({
      * Play the congratulations music and set a event listener on keydown for pausing the music
      * (Setting the event listener seems to trigger a re-render of the component, and unexpectedly setSeconds becomes -1 whereas setTimeout doesn't run on that re-render because setSeconds == 0 at that moment)
      */
-    function playCongratulationsMusic() {
+    const playCongratulationsMusic = () => {
         const congratulations = document.querySelector('.congratulations-music');
         congratulations.currentTime = 0;
         congratulations.loop = true;
@@ -188,7 +188,7 @@ function Chrono({
         }
 
 
-        return function cleanup() {
+        return () => {
             clearTimeout(id)
         }
     }, [secondsLeft, isPaused]);

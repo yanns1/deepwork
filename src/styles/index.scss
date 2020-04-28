@@ -5,7 +5,7 @@
   --side-padding: 2rem;
   --clickableEl-margin: 0 1rem;
   --clickableEl-padding: 0.5rem;
-  --opacity-before-hover: 0.75;
+  --opacity-before-hover: 0.7;
 }
 
 .html {
@@ -220,11 +220,14 @@ main {
   align-items: center;
 }
 
+.chronos {
+  padding: 0 var(--side-padding);
+}
+
 .pre-chronos {
   padding: 1rem var(--side-padding);
   background-color: rgb(226, 226, 226);
 
-  // @todo déplacer jusytify stuff sur le content
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -269,17 +272,20 @@ main {
   }
 }
 
+.stats {
+  padding: 2rem var(--side-padding);
+}
+
 .stats-title {
   text-align: center;
 }
 
 #chart {
   max-width: 90vw;
-  margin: 3rem;
+  margin: 3rem 0;
 }
 
 .delete-labels {
-  margin: 2rem 3rem; // same margin on the sides than chart
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -289,8 +295,29 @@ main {
   text-align: center;
 }
 
-.footer-link > i {
+.footer {
+  height: 10vh;
+  background: rgb(66, 66, 66);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 var(--side-padding);
+}
+
+.footer-link {
   color: inherit;
+  margin: 0 1em;
+  padding: 1em 1em;
+  text-decoration: none;
+}
+
+.brand-icon {
+  font-size: 2rem;
+  opacity: var(--opacity-before-hover);
+
+  &:hover {
+    opacity: 1;
+  }
 }
 
 @import "./media.scss"; // media queries

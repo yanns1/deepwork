@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
  * @file Creates section with current time displayed
  * @requires react (useState, useEffect)
  */
-function CurrentTime() {
+const CurrentTime = () => {
     const [now, setNow] = useState(new Date());
     const [currentMinute, setCurrentMinute] = useState(now.getMinutes());
     const [currentHour, setCurrentHour] = useState(now.getHours());

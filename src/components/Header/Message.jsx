@@ -6,7 +6,7 @@ import { AuthContext } from '../context/AuthContext.jsx'
  * @file Component with message conveying to log in to access prechronos and stats
  * @requires react
  */
-function Message() {
+const Message = () => {
     // Contexts
     const { isDarkTheme } = useContext(ThemeContext);
     const { userCred } = useContext(AuthContext)

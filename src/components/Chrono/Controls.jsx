@@ -1,17 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
 
 /**
  * @file Creates control buttons (start/pause/reset)
  * @requires react
  */
-function Controls({ chronoID, isPaused, setIsPaused, setIsRestored }) {
+const Controls = ({
+    chronoID,
+    isPaused,
+    setIsPaused,
+    setIsRestored
+}) => {
 
-    function togglePause() {
+    const togglePause = () => {
         setIsPaused(prevState => !prevState);
     }
 
-    function restoreChrono(e) {
+    const restoreChrono= e => {
         const restoreButtonClasses = Array.from(e.target.parentElement.classList);
         // A changer si rajoute des chronos
         const buttonID = restoreButtonClasses.some(className => className === 'first') ? 1 : 2;

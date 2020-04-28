@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import dialogPolyfill from 'dialog-polyfill';
 import { AuthContext } from '../context/AuthContext.jsx';
 
-function Navbar() {
+const Navbar = () => {
     // Contexts
     const { userCred } = useContext(AuthContext)
 
-    function showSignupDialog() {
+    const showSignupDialog = () => {
         const signupDialog = document.querySelector('.signup-dialog');
         if (!signupDialog.showModal) {
             dialogPolyfill.registerDialog(signupDialog);
@@ -14,7 +14,7 @@ function Navbar() {
         signupDialog.showModal();
     }
 
-    function showLoginDialog() {
+    const showLoginDialog = () => {
         const loginDialog = document.querySelector('.login-dialog');
         if (!loginDialog.showModal) {
             dialogPolyfill.registerDialog(loginDialog);
@@ -22,7 +22,7 @@ function Navbar() {
         loginDialog.showModal();
     }
 
-    function showAccountDialog() {
+    const showAccountDialog = () => {
         const accountDialog = document.querySelector('.account-dialog');
         if (!accountDialog.showModal) {
             dialogPolyfill.registerDialog(accountDialog);
@@ -30,7 +30,7 @@ function Navbar() {
         accountDialog.showModal();
     }
 
-    function signOut() {
+    const signOut = () => {
         auth.signOut();
     }
 

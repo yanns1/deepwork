@@ -6,7 +6,9 @@ const ThemeContext = React.createContext();
  * @file Initiates the theme context
  * @requires react
  */
-function ThemeContextProvider({ children }) {
+const ThemeContextProvider = ({
+    children
+}) => {
     // Contexts
     const { userCred } = useContext(AuthContext)
 

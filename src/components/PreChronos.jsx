@@ -4,7 +4,7 @@ import { AuthContext } from './context/AuthContext.jsx';
 
 /**
  * @file Creates pre-chronos widgets and handle database updating related to them
- * @requires react (useState, useEffect, useContext)
+ * @requires react
  */
 const PreChronos = ({
     setIsPreChronoClicked,
