@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import Header from './Header/Header.jsx';
 import Music from './Music.jsx';
-import CurrentTime from './CurrentTime.jsx';
-import Chronos from './Chronos.jsx';
+import Time from './Time.jsx';
 import Stats from './Stats.jsx';
 import Footer from './Footer.jsx';
 import { ThemeContextProvider } from './context/ThemeContext.jsx';
@@ -12,7 +11,7 @@ import { AuthContextProvider } from './context/AuthContext.jsx';
  * @file Returns the whole app by concatenating all components
  * @requires react
  */
-function App() {
+const App = () => {
     /**
      * Set window listeners
      */
@@ -39,7 +38,7 @@ function App() {
             console.error("window obj not available !")
         }
 
-        return function cleanup() {
+        return () => {
             window.removeEventListener('keydown', pauseCongratulationsMusic)
             window.removeEventListener('keydown', toggleConcentrationMusic)
         }
@@ -51,8 +50,7 @@ function App() {
             <ThemeContextProvider>
                 <Header />
                 <Music />
-                <CurrentTime />
-                <Chronos />
+                <Time />
                 <Stats />
                 <Footer />
             </ThemeContextProvider>

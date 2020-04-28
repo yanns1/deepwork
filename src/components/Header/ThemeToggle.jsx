@@ -5,7 +5,7 @@ import { ThemeContext } from '../context/ThemeContext.jsx'
 /**
  * Component returning theme icon with the ability to toggle theme when click on it
  */
-function ThemeToggle() {
+const ThemeToggle = () => {
     // Contexts
     const { userCred } = useContext(AuthContext);
     const { isDarkTheme, toggleTheme } = useContext(ThemeContext);
@@ -14,7 +14,7 @@ function ThemeToggle() {
     const body = document.querySelector('body');
     isDarkTheme ? body.classList.add('dark') : body.classList.remove('dark');
 
-    function handleClick(e) {
+    const handleClick = e => {
         if (e.target.dataset.role === 'toggleTheme') {
             // Update db
             if (userCred) {

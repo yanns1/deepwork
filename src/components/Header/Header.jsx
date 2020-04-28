@@ -6,7 +6,7 @@ import Navbar from './Navbar.jsx';
 import ThemeToggle from './ThemeToggle.jsx';
 
 
-function Header() {
+const Header = () => {
     const { isDarkTheme } = useContext(ThemeContext);
 
     return (

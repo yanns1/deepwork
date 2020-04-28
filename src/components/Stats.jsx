@@ -191,7 +191,7 @@ const Stats = () => {
     if (!userCred) return null
     const checkboxesJsx = createDeleteCheckboxes(Array.from(stats.keys()))
     return (
-        <>
+        <div className="stats">
             <h3 className="stats-title">Statistics</h3>
             <canvas id="chart" width="400" height="400"></canvas>
             {checkboxesJsx.length > 0 &&
@@ -201,7 +201,7 @@ const Stats = () => {
                     <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">Delete</button>
                 </form>
             }
-        </>
+        </div>
     )
 }
 

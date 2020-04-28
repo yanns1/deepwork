@@ -5,19 +5,19 @@ import Label from "./Label.jsx"
  * @file Creates inputs for Chrono component
  * @requires react
  */
-function Input({
+const Input = ({
     label,
     setLabel,
     setInitChronoTime,
     setSecondsLeft,
     convertIntoSeconds
-}) {
+}) => {
     /**
      * Modify states (secondsLeft, initChronoTime) which lauchs the chrono
      * @param {Object} e - Event
      * @returns {void}
      */
-    function handleSubmit(e) {
+    const handleSubmit = e => {
         e.preventDefault()
 
         const form = e.target
@@ -203,4 +203,4 @@ function Input({
         </form>
     )
 }
-export default Input;
+export default Input

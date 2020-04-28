@@ -1,29 +1,28 @@
-import React from 'react';
-import twitterLogo from '../img/twitter.png';
-import githubLogo from '../img/github.png';
+import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 /**
  * @file Creates the footer
  * @requires react
  */
-function Footer() {
+const Footer = () => {
     return (
-        <footer>
+        <footer className="footer">
             <a
                 className="footer-link"
-                target="_blank "
+                target="_blank"
                 href="https://twitter.com/YannSalmon1"
                 title="Twitter"
             >
-                <img src={twitterLogo} alt="twitter logo" />
+                <FontAwesomeIcon className={"brand-icon"} icon={["fab", "twitter"]} />
             </a>
             <a
                 className="footer-link"
-                target="_blank "
-                href="https://github.com/yanns1/"
+                target="_blank"
+                href="https://github.com/yanns1/deepwork"
                 title="Github"
             >
-                <img src={githubLogo} alt="twitter logo" />
+                <FontAwesomeIcon className={"brand-icon"} icon={["fab","github"]} />
             </a>
         </footer>
     )

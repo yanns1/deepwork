@@ -9,7 +9,7 @@ const Display = ({
     chronoID
 }) => {
 
-    const convertIntoHours = (seconds) => {
+    const convertIntoHours = seconds => {
         // Because of a problem unresolved, secondsLeft can have the value -1
         if (seconds < 0) {
             return {

@@ -5,9 +5,9 @@ import congratulationsMusic from '../videos/congratulations.mp3';
 
 /**
  * @file Creates the music section
- * @requires react (useState, useContext)
+ * @requires react
  */
-function Music() {
+const Music = () => {
     // Contexts
     const { isDarkTheme } = useContext(ThemeContext);
 
@@ -15,14 +15,14 @@ function Music() {
     const [videoUrl, setVideoUrl] = useState('');
     const [iframeUrl, setIframeUrl] = useState('');
 
-    function handleChange(e) {
+    const handleChange = e => {
         const {name, value} = e.target;
         if (name === 'videoUrl') {
             setVideoUrl(() => value);
         };
     }
 
-    function handleSubmit(e) {
+    const handleSubmit = e => {
         e.preventDefault();
         setIframeUrl(() => videoUrl);
     }

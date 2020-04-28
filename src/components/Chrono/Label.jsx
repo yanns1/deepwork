@@ -1,11 +1,14 @@
 import React, { useContext } from "react"
 import { AuthContext } from '../context/AuthContext.jsx';
 
-function Label({ label, setLabel }) {
+const Label = ({
+    label,
+    setLabel
+}) => {
     // Contexts
     const { userCred } = useContext(AuthContext)
 
-    function handleChange(e) {
+    const handleChange = e => {
         const { name, value } = e.target;
         if (name === 'label') {
             setLabel(() => value);

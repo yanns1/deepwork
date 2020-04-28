@@ -1,5 +1,6 @@
 import './styles/index.scss';
 import './scripts/db.js';
+import './scripts/initializeFontAwesome.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
