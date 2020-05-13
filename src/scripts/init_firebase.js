@@ -8,13 +8,13 @@ import "firebase/firestore";
 // Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyDriRmwVpj9WK8b3oI1LW_Gbia1ZY79Siw",
-authDomain: "deep-work-c7fe3.firebaseapp.com",
-databaseURL: "https://deep-work-c7fe3.firebaseio.com",
-projectId: "deep-work-c7fe3",
-storageBucket: "deep-work-c7fe3.appspot.com",
-messagingSenderId: "1094518983732",
-appId: "1:1094518983732:web:2f05345fad1584d13f4e61",
-measurementId: "G-7XBQT0MWPN",
+    authDomain: "deep-work-c7fe3.firebaseapp.com",
+    databaseURL: "https://deep-work-c7fe3.firebaseio.com",
+    projectId: "deep-work-c7fe3",
+    storageBucket: "deep-work-c7fe3.appspot.com",
+    messagingSenderId: "1094518983732",
+    appId: "1:1094518983732:web:2f05345fad1584d13f4e61",
+    measurementId: "G-7XBQT0MWPN",
 };
 
 // Initialize Firebase
