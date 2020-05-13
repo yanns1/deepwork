@@ -6,11 +6,10 @@ const Dialogs = () => {
     // Contexts
     const { userCred } = useContext(AuthContext)
 
-    const signUp = async (e) => {
+    const signUp = async e => {
         e.preventDefault();
-        const signupForm = document.querySelector('.signup-form');
-
-        // get inputs
+        console.log(e.target)
+        const signupForm = e.target;
         const email = signupForm['signup-email'].value;
         const password = signupForm['signup-pwd'].value;
 
@@ -35,15 +34,13 @@ const Dialogs = () => {
     const logIn = e => {
         e.preventDefault();
 
-        const loginForm = document.querySelector('.login-form');
-
-        // get inputs
+        const loginForm = e.target;
         const email = loginForm['login-email'].value;
         const password = loginForm['login-pwd'].value;
 
         // log in user
         auth.signInWithEmailAndPassword(email, password)
-            .then(cred => {
+            .then(() => {
                 // close modal and reset form
                 closeDialogs();
             })
@@ -109,7 +106,7 @@ const Dialogs = () => {
                     <dialog className="signup-dialog mdl-dialog">
                         <h4 className="mdl-dialog__title">Sign up</h4>
                         <div className="mdl-dialog__content">
-                            <form className="signup-form" action="#" onSubmit={signUp}>
+                            <form className="signup-form" onSubmit={signUp}>
                                 <div
                                     className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
                                 >
@@ -156,7 +153,7 @@ const Dialogs = () => {
                     <dialog className="login-dialog mdl-dialog">
                         <h4 className="mdl-dialog__title">Log in</h4>
                         <div className="mdl-dialog__content">
-                            <form className="login-form" action="#" onSubmit={logIn}>
+                            <form className="login-form" onSubmit={logIn}>
                                 <div
                                     className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
                                 >
