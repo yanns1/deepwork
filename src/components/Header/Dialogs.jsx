@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { AuthContext } from '../context/AuthContext.jsx'
+import { auth, db } from '../../scripts/init_firebase.js';
 
 const Dialogs = () => {
     // Contexts

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { AuthContext } from '../context/AuthContext.jsx'
 import { ThemeContext } from '../context/ThemeContext.jsx'
+import { db } from '../../scripts/init_firebase.js'
 
 /**
  * Component returning theme icon with the ability to toggle theme when click on it

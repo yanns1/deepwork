@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { ThemeContext } from './context/ThemeContext.jsx';
 import { AuthContext } from './context/AuthContext.jsx';
+import { firebase, db } from '../scripts/init_firebase.js';
 
 /**
  * @file Creates pre-chronos widgets and handle database updating related to them

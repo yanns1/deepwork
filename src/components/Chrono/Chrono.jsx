@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import PropTypes from 'prop-types';
+import { firebase, db } from '../../scripts/init_firebase.js';
 import Input from './Input.jsx';
 import Display from './Display.jsx';
 import Controls from './Controls.jsx';

@@ -1,9 +1,11 @@
 import './styles/index.scss';
-import './scripts/db.js';
-import './scripts/initializeFontAwesome.js';
+import { enablePersistenceOfDb } from './scripts/init_firebase.js';
+import './scripts/init_font_awesome.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
+
+enablePersistenceOfDb()
 
 ReactDOM.render(
     <App />,

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext.jsx'
+import  { db } from '../../scripts/init_firebase.js'
 const ThemeContext = React.createContext();
 
 /**

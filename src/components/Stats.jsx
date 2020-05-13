@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { AuthContext } from './context/AuthContext.jsx'
+import { firebase, db } from '../scripts/init_firebase.js';
 /**
  * @file Generates chart with statistics from data in Firebase Database
  * @requires react

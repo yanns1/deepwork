@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import dialogPolyfill from 'dialog-polyfill';
 import { AuthContext } from '../context/AuthContext.jsx';
+import { auth } from '../../scripts/init_firebase.js';
 
 const Navbar = () => {
     // Contexts
