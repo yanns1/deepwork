@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { AuthContext } from '../context/AuthContext.jsx'
+import React, { useState, useEffect, useContext, useMemo } from 'react';
+import { useAuthContext } from '../context/AuthContext.jsx'
 import  { db } from '../../scripts/init_firebase.js'
 const ThemeContext = React.createContext();
 
@@ -8,20 +8,22 @@ const ThemeContext = React.createContext();
  * @requires react
  */
 const ThemeContextProvider = ({
-    children
+    children,
+    initialState = true
 }) => {
-    // Contexts
-    const { userCred } = useContext(AuthContext)
+    const userCred = useAuthContext()
 
-    // States
-    const [isDarkTheme, setIsDarkTheme] = useState(true);
+    const [isDarkTheme, setIsDarkTheme] = useState(initialState);
 
     /**
      * Toggle theme state (used when user no authentificated)
-     * @function listenToTheme
+     * @function toggleTheme
      * @returns {function}
      */
     const toggleTheme = () => setIsDarkTheme(prevState => !prevState)
+
+    // Optimize perf
+    const contextValue = useMemo(() => ({ isDarkTheme, toggleTheme }), [isDarkTheme])
 
     /**
      * Set listener for changes in db and set theme state accordingly to response.
@@ -41,14 +43,13 @@ const ThemeContextProvider = ({
 
     return (
         <ThemeContext.Provider
-            value={{
-                isDarkTheme,
-                toggleTheme
-            }}
+            value={contextValue}
         >
             {children}
         </ThemeContext.Provider>
     )
 }
 
-export { ThemeContext, ThemeContextProvider };
+const useThemeContext = () => useContext(ThemeContext)
+
+export { useThemeContext, ThemeContextProvider };

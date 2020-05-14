@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import dialogPolyfill from 'dialog-polyfill';
-import { AuthContext } from '../context/AuthContext.jsx';
+import { useAuthContext } from '../context/AuthContext.jsx';
 import { auth } from '../../scripts/init_firebase.js';
 
 const Navbar = () => {
     // Contexts
-    const { userCred } = useContext(AuthContext)
+    const userCred = useAuthContext()
 
     const showSignupDialog = () => {
         const signupDialog = document.querySelector('.signup-dialog');

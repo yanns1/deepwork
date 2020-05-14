@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useMemo } from 'react';
 import { auth } from '../../scripts/init_firebase.js';
 const AuthContext = React.createContext();
 
@@ -7,23 +7,27 @@ const AuthContext = React.createContext();
  * @requires react
  */
 const AuthContextProvider = ({
-    children
+    children,
+    initialState = null
 }) => {
-    const [userCred, setUserCred] = useState(null);
+    const [userCred, setUserCred] = useState(initialState);
 
     auth.onAuthStateChanged(userCred => {
         setUserCred(() => userCred)
     });
 
+    // Optimize perf
+    const contextValue = useMemo(() => userCred, [userCred])
+
     return (
         <AuthContext.Provider
-            value={{
-                userCred
-            }}
+            value={contextValue}
         >
             {children}
         </AuthContext.Provider>
     )
 }
 
-export { AuthContext, AuthContextProvider }
+const useAuthContext = () => useContext(AuthContext)
+
+export { useAuthContext, AuthContextProvider }

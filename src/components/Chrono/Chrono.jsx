@@ -3,7 +3,7 @@ import { firebase, db } from '../../scripts/init_firebase.js';
 import Input from './Input.jsx';
 import Display from './Display.jsx';
 import Controls from './Controls.jsx';
-import { AuthContext } from '../context/AuthContext.jsx';
+import { useAuthContext } from '../context/AuthContext.jsx';
 
 /**
  * @file Creates a chrono container and manages all things related: database, congratulations_music
@@ -20,7 +20,7 @@ const Chrono = ({
     setIsFirstChronoRunning
 }) => {
     // Contexts
-    const { userCred } = useContext(AuthContext);
+    const userCred = useAuthContext();
 
     // States
     const [secondsLeft, setSecondsLeft] = useState(0);

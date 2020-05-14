@@ -1,6 +1,6 @@
-import React, { useContext } from "react"
-import { ThemeContext } from '../context/ThemeContext.jsx'
-import { AuthContext } from '../context/AuthContext.jsx'
+import React from "react"
+import { useThemeContext } from '../context/ThemeContext.jsx'
+import { useAuthContext } from '../context/AuthContext.jsx'
 
 /**
  * @file Component with message conveying to log in to access prechronos and stats
@@ -8,8 +8,8 @@ import { AuthContext } from '../context/AuthContext.jsx'
  */
 const Message = () => {
     // Contexts
-    const { isDarkTheme } = useContext(ThemeContext);
-    const { userCred } = useContext(AuthContext)
+    const { isDarkTheme } = useThemeContext();
+    const userCred = useAuthContext()
 
     if (userCred) return null
     return (

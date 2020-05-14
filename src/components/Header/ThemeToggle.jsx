@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
-import { AuthContext } from '../context/AuthContext.jsx'
-import { ThemeContext } from '../context/ThemeContext.jsx'
+import React from 'react'
+import { useAuthContext } from '../context/AuthContext.jsx'
+import { useThemeContext } from '../context/ThemeContext.jsx'
 import { db } from '../../scripts/init_firebase.js'
 
 /**
@@ -8,8 +8,8 @@ import { db } from '../../scripts/init_firebase.js'
  */
 const ThemeToggle = () => {
     // Contexts
-    const { userCred } = useContext(AuthContext);
-    const { isDarkTheme, toggleTheme } = useContext(ThemeContext);
+    const userCred = useAuthContext()
+    const { isDarkTheme, toggleTheme } = useThemeContext();
 
     // Add or remove 'dark' class to body
     const body = document.querySelector('body');

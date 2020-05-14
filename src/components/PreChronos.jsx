@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { ThemeContext } from './context/ThemeContext.jsx';
-import { AuthContext } from './context/AuthContext.jsx';
+import React, { useState, useEffect } from 'react';
+import { useThemeContext } from './context/ThemeContext.jsx';
+import { useAuthContext } from './context/AuthContext.jsx';
 import { firebase, db } from '../scripts/init_firebase.js';
 
 /**
@@ -17,8 +17,8 @@ const PreChronos = ({
     const [prechronos, setPrechronos] = useState(null)
 
     // Contexts
-    const { isDarkTheme } = useContext(ThemeContext);
-    const { userCred } = useContext(AuthContext);
+    const { isDarkTheme } = useThemeContext();
+    const userCred = useAuthContext();
 
     /**
      * Create a chip given the hours, minutes and seconds

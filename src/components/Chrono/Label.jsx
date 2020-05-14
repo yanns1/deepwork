@@ -1,12 +1,12 @@
-import React, { useContext } from "react"
-import { AuthContext } from '../context/AuthContext.jsx';
+import React from "react"
+import { useAuthContext } from '../context/AuthContext.jsx';
 
 const Label = ({
     label,
     setLabel
 }) => {
     // Contexts
-    const { userCred } = useContext(AuthContext)
+    const userCred = useAuthContext()
 
     const handleChange = e => {
         const { name, value } = e.target;

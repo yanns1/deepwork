@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { ThemeContext } from './context/ThemeContext.jsx';
+import React, { useState } from 'react';
+import { useThemeContext } from './context/ThemeContext.jsx';
 import concentrationMusic from '../videos/concentration-music.mp3';
 import congratulationsMusic from '../videos/congratulations.mp3';
 
@@ -9,7 +9,7 @@ import congratulationsMusic from '../videos/congratulations.mp3';
  */
 const Music = () => {
     // Contexts
-    const { isDarkTheme } = useContext(ThemeContext);
+    const { isDarkTheme } = useThemeContext();
 
     // States
     const [videoUrl, setVideoUrl] = useState('');

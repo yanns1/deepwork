@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext.jsx';
+import { useThemeContext } from '../context/ThemeContext.jsx';
 import Dialogs from './Dialogs.jsx';
 import Message from './Message.jsx';
 import Navbar from './Navbar.jsx';
@@ -7,7 +7,7 @@ import ThemeToggle from './ThemeToggle.jsx';
 
 
 const Header = () => {
-    const { isDarkTheme } = useContext(ThemeContext);
+    const { isDarkTheme } = useThemeContext();
 
     return (
         <header>

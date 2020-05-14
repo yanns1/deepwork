@@ -1,10 +1,10 @@
-import React, { useContext, useEffect } from 'react'
-import { AuthContext } from '../context/AuthContext.jsx'
+import React, { useEffect } from 'react'
+import { useAuthContext } from '../context/AuthContext.jsx'
 import { auth, db } from '../../scripts/init_firebase.js';
 
 const Dialogs = () => {
     // Contexts
-    const { userCred } = useContext(AuthContext)
+    const userCred = useAuthContext()
 
     const signUp = async e => {
         e.preventDefault();

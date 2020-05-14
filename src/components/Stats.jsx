@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { AuthContext } from './context/AuthContext.jsx'
-import { firebase, db } from '../scripts/init_firebase.js';
+import React, { useState, useEffect } from 'react'
+import { useAuthContext } from './context/AuthContext.jsx'
+import { db } from '../scripts/init_firebase.js';
 /**
  * @file Generates chart with statistics from data in Firebase Database
  * @requires react
@@ -8,7 +8,7 @@ import { firebase, db } from '../scripts/init_firebase.js';
 
 const Stats = () => {
     // Contexts
-    const { userCred } = useContext(AuthContext)
+    const userCred = useAuthContext()
 
     // States
     /**
