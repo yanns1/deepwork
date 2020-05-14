@@ -2,11 +2,8 @@ import React, { useState } from 'react'
 import CurrentTime from './CurrentTime.jsx'
 import Chrono from './Chrono/Chrono.jsx'
 import PreChronos from './PreChronos.jsx'
+import StyledChronos from './styled/main/time/StyledChronos.js'
 
-/**
- * @file Container for the 2 Chrono components
- * @requires react (useState)
- */
 const Time = () => {
     // That boolean as no meaning. I just reverse it when click to trigger useEffect in Chrono.jsx
     const [isPreChronoClicked, setIsPreChronoClicked ] = useState(false);
@@ -24,9 +21,9 @@ const Time = () => {
     }
 
     return (
-        <div className="time">
+        <>
             <CurrentTime></CurrentTime>
-            <div className="chronos">
+            <StyledChronos>
                 <Chrono
                     key={'first'}
                     chronoID={'first'}
@@ -49,14 +46,14 @@ const Time = () => {
                     isFirstChronoRunning={isFirstChronoRunning}
                     setIsFirstChronoRunning={setIsFirstChronoRunning}
                 />
-            </div>
+            </StyledChronos>
             <PreChronos
                 setIsPreChronoClicked={setIsPreChronoClicked}
                 setPreChronoSeconds={setPreChronoSeconds}
                 setPreChronoLabel={setPreChronoLabel}
                 convertIntoSeconds={convertIntoSeconds}
             />
-        </div>
+        </>
     )
 }
 

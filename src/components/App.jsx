@@ -6,6 +6,7 @@ import Stats from './Stats.jsx';
 import Footer from './Footer.jsx';
 import { ThemeContextProvider } from './context/ThemeContext.jsx';
 import { AuthContextProvider } from './context/AuthContext.jsx';
+import GlobalStyles from './styled/GlobalStyles.js';
 
 /**
  * @file Returns the whole app by concatenating all components
@@ -46,15 +47,18 @@ const App = () => {
     }, [])
 
     return (
-        <AuthContextProvider>
-            <ThemeContextProvider>
-                <Header />
-                <Music />
-                <Time />
-                <Stats />
-                <Footer />
-            </ThemeContextProvider>
-        </AuthContextProvider>
+        <>
+            <GlobalStyles></GlobalStyles>
+            <AuthContextProvider>
+                <ThemeContextProvider>
+                    <Header />
+                    <Music />
+                    <Time />
+                    <Stats />
+                    <Footer />
+                </ThemeContextProvider>
+            </AuthContextProvider>
+        </>
     )
 }
 

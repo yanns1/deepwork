@@ -1,14 +1,15 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useAuthContext } from '../context/AuthContext.jsx'
 import { auth, db } from '../../scripts/init_firebase.js';
+import ErrorMess from '../styled/header/ErrorMess.js'
 
 const Dialogs = () => {
-    // Contexts
+    const [signupErrMess, setSignupErrMess] = useState('')
+    const [loginErrMess, setLoginErrMess] = useState('')
     const userCred = useAuthContext()
 
     const signUp = async e => {
         e.preventDefault();
-        console.log(e.target)
         const signupForm = e.target;
         const email = signupForm['signup-email'].value;
         const password = signupForm['signup-pwd'].value;
@@ -24,9 +25,7 @@ const Dialogs = () => {
                 })
             })
             .catch(err => {
-                const signupErrorMessage = document.querySelector('.signup-error-message');
-                signupErrorMessage.innerHTML = err.message;
-                signupErrorMessage.style.display = 'block';
+                setSignupErrMess(err.message)
                 console.error(`Error signing up: ${err}`)
             })
     }
@@ -45,9 +44,7 @@ const Dialogs = () => {
                 closeDialogs();
             })
             .catch(err => {
-                const loginErrorMessage = document.querySelector('.login-error-message');
-                loginErrorMessage.innerHTML = err.message;
-                loginErrorMessage.style.display = 'block';
+                setLoginErrMess(err.message)
                 console.error(`Error logging in: ${err}`)
             });
     }
@@ -56,8 +53,7 @@ const Dialogs = () => {
         // Because 2 differents dialogs, close the 2 each time instead of trying to know which one is open
 
         // Empty error message div
-        const signupErrorMessage = document.querySelector('.signup-error-message');
-        signupErrorMessage.innerHTML = '';
+        setSignupErrMess('')
         // Close dialog
         const signupDialog = document.querySelector('.signup-dialog');
         signupDialog.close();
@@ -66,8 +62,7 @@ const Dialogs = () => {
         signupForm.reset();
 
         // Empty error message div
-        const loginErrorMessage = document.querySelector('.login-error-message');
-        loginErrorMessage.innerHTML = '';
+        setLoginErrMess('')
         // Close dialog
         const loginDialog = document.querySelector('.login-dialog');
         loginDialog.close();
@@ -131,7 +126,7 @@ const Dialogs = () => {
                                     >Password...</label>
                                     <span className="mdl-textfield__error">Eight or more characters</span>
                                 </div>
-                                <div className="signup-error-message"></div>
+                                <ErrorMess>{signupErrMess}</ErrorMess>
                                 <div className="mdl-dialog__actions">
                                     <button
                                         className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
@@ -178,7 +173,7 @@ const Dialogs = () => {
                                     >Password...</label>
                                     <span className="mdl-textfield__error">Eight or more characters</span>
                                 </div>
-                                <div className="login-error-message"></div>
+                                <ErrorMess>{loginErrMess}</ErrorMess>
                                 <div className="mdl-dialog__actions">
                                     <button
                                         className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"

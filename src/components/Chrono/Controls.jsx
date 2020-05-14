@@ -1,9 +1,7 @@
 import React from 'react'
+import Icon from '../styled/shared/Icon.js'
 
-/**
- * @file Creates control buttons (start/pause/reset)
- * @requires react
- */
+
 const Controls = ({
     chronoID,
     isPaused,
@@ -38,12 +36,12 @@ const Controls = ({
             <div className="pause-restore-buttons">
                 <div className="pause-button-wrap">
                     <button className="pause-button mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--accent" onClick={togglePause}>
-                        <i className="material-icons">{isPaused ? 'play_arrow' : 'pause'}</i>
+                        <Icon className="material-icons">{isPaused ? 'play_arrow' : 'pause'}</Icon>
                     </button>
                 </div>
 
                 <div className="restore-button-wrap">
-                    <button className={restoreButtonClasses} onClick={restoreChrono}><i className="material-icons">restore</i></button>
+                    <button className={restoreButtonClasses} onClick={restoreChrono}><Icon className="material-icons">restore</Icon></button>
                 </div>
             </div>
         </>

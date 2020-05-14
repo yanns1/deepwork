@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useAuthContext } from './context/AuthContext.jsx'
 import { db } from '../scripts/init_firebase.js';
-/**
- * @file Generates chart with statistics from data in Firebase Database
- * @requires react
- */
+import StyledStats from './styled/main/stats/StyledStats.js';
+import DeleteLabelsForm from './styled/main/stats/DeleteLabelsForm.js';
 
 const Stats = () => {
-    // Contexts
     const userCred = useAuthContext()
 
-    // States
     /**
      * State for stats
      * (make sure that's initialized to an empty array in order to allow calling keys() and values() on it, even when database has not responded yet, which is the case at reload)
@@ -192,17 +188,17 @@ const Stats = () => {
     if (!userCred) return null
     const checkboxesJsx = createDeleteCheckboxes(Array.from(stats.keys()))
     return (
-        <div className="stats">
-            <h3 className="stats-title">Statistics</h3>
+        <StyledStats>
+            <h3 className="title">Statistics</h3>
             <canvas id="chart" width="400" height="400"></canvas>
             {checkboxesJsx.length > 0 &&
-                <form className="delete-labels" action="#" onSubmit={deleteLabelsInDb}>
-                    <div className="delete-labels-title">Wants to delete labels ? Choose the ones you don't want to see anymore :</div>
+                <DeleteLabelsForm onSubmit={deleteLabelsInDb}>
+                    <div className="hint">Wants to delete labels ? Choose the ones you don't want to see anymore :</div>
                     {checkboxesJsx}
-                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" type="submit">Delete</button>
-                </form>
+                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Delete</button>
+                </DeleteLabelsForm>
             }
-        </div>
+        </StyledStats>
     )
 }
 

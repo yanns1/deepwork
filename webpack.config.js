@@ -27,7 +27,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.s[ac]ss$/i,
+                test: /\.((c|sa|sc)ss)$/i,
                 use: [
                     // Creates `style` nodes from JS strings
                     'style-loader',
@@ -39,7 +39,7 @@ module.exports = {
             },
 
             {
-                test: /\.(png|svg|jpg|gif|ogg|mp3|wav)$/,
+                test: /\.(png|svg|jpe?g|ogg|mp3|woff|woff2)$/,
                 exclude: /node_modules/,
                 use: [
                     {

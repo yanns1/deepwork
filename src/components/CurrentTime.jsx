@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import StyledCurrentTime from './styled/header/StyledCurrentTime.js'
 
-/**
- * @file Creates section with current time displayed
- * @requires react (useState, useEffect)
- */
 const CurrentTime = () => {
     const [now, setNow] = useState(new Date());
     const [currentMinute, setCurrentMinute] = useState(now.getMinutes());
@@ -20,9 +17,9 @@ const CurrentTime = () => {
     }, [now, currentMinute, currentHour]);
 
     return (
-        <h5 className="current-time"><strong>Now</strong>
+        <StyledCurrentTime className="current-time"><strong>Now</strong>
             <div>{currentHour}:{currentMinute < 10 ? '0' + currentMinute : currentMinute}</div>
-        </h5>
+        </StyledCurrentTime>
     )
 }
 

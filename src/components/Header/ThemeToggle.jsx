@@ -2,12 +2,10 @@ import React from 'react'
 import { useAuthContext } from '../context/AuthContext.jsx'
 import { useThemeContext } from '../context/ThemeContext.jsx'
 import { db } from '../../scripts/init_firebase.js'
+import ThemeContainer from '../styled/header/ThemeContainer.js'
+import ThemeIcon from '../styled/header/ThemeIcon.js'
 
-/**
- * Component returning theme icon with the ability to toggle theme when click on it
- */
 const ThemeToggle = () => {
-    // Contexts
     const userCred = useAuthContext()
     const { isDarkTheme, toggleTheme } = useThemeContext();
 
@@ -34,9 +32,9 @@ const ThemeToggle = () => {
     }
 
     return (
-        <div className="theme">
-            <i className="material-icons theme-icon" data-role="toggleTheme" onClick={handleClick} title="Change the theme">brightness_medium</i>
-        </div>
+        <ThemeContainer>
+            <ThemeIcon className="material-icons" data-role="toggleTheme" onClick={handleClick} title="Change the theme">brightness_medium</ThemeIcon>
+        </ThemeContainer>
     )
 }
 

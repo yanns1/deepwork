@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 import { useThemeContext } from './context/ThemeContext.jsx';
+import MusicContainer from './styled/main/music/MusicContainer.js';
+import AudioContainer from './styled/main/music/AudioContainer.js';
+import VideoContainer from './styled/main/music/VideoContainer.js';
 import concentrationMusic from '../videos/concentration-music.mp3';
 import congratulationsMusic from '../videos/congratulations.mp3';
+import Icon from './styled/shared/Icon.js'
 
-/**
- * @file Creates the music section
- * @requires react
- */
 const Music = () => {
-    // Contexts
-    const { isDarkTheme } = useThemeContext();
-
-    // States
     const [videoUrl, setVideoUrl] = useState('');
     const [iframeUrl, setIframeUrl] = useState('');
+    const { isDarkTheme } = useThemeContext();
 
     const handleChange = e => {
         const {name, value} = e.target;
@@ -33,12 +30,12 @@ const Music = () => {
     }
 
     return (
-        <div className={isDarkTheme ? 'dark music' : 'music'}>
+        <MusicContainer className={isDarkTheme ? 'music dark' : 'music'}>
             <video className="congratulations-music" src={congratulationsMusic} style={{display: 'none'}}></video>
-            <div className="audio-wrapper">
-                <h5 className="audio-title">
+            <AudioContainer>
+                <h5 className="audio__title">
                     Concentration music (default)
-                    <div id="hint" className="icon material-icons">info</div>
+                    <Icon id="hint" className="material-icons">info</Icon>
                     <div className="mdl-tooltip" data-mdl-for="hint">
                         Press "1" for playing/pausing
                     </div>
@@ -47,9 +44,9 @@ const Music = () => {
                     Impossible de lire la vidéo ! Lien ytb:
                     https://www.youtube.com/watch?v=KNuoGeD9Qeo&t=3s
                 </audio>
-            </div>
-            <div className="video-wrapper">
-                <h5 className="video-title">Choose what you want to listen !</h5>
+            </AudioContainer>
+            <VideoContainer>
+                <h5 className="video__title">Choose what you want to listen !</h5>
                 <ol>
                     <li>Access your video on Youtube</li>
                     <li>Below the video, click on <strong>SHARE</strong></li>
@@ -57,13 +54,13 @@ const Music = () => {
                     <li>Copy the url you see after "src=" (without the quotes)</li>
                     <li>Paste-it in the input below</li>
                 </ol>
-                <form className="upload-form" action="" onSubmit={handleSubmit}>
+                <form className="video__form" onSubmit={handleSubmit}>
                     <input type="text" name="videoUrl" value={videoUrl} onChange={handleChange}/>
                     <button type="submit">Upload</button>
                 </form>
                 <iframe className="video" src={iframeUrl} style={iframeUrl ? iframeStyles : null}></iframe>
-            </div>
-        </div>
+            </VideoContainer>
+        </MusicContainer>
     );
 }
 

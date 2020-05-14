@@ -1,14 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { firebase, db } from '../../scripts/init_firebase.js';
 import Input from './Input.jsx';
 import Display from './Display.jsx';
 import Controls from './Controls.jsx';
 import { useAuthContext } from '../context/AuthContext.jsx';
 
-/**
- * @file Creates a chrono container and manages all things related: database, congratulations_music
- * @requires react (useState, useEffect)
- */
+
 const Chrono = ({
     chronoID,
     isPreChronoClicked,

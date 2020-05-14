@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useThemeContext } from './context/ThemeContext.jsx';
 import { useAuthContext } from './context/AuthContext.jsx';
 import { firebase, db } from '../scripts/init_firebase.js';
+import StyledPreChronos from './styled/main/time/StyledPreChronos.js'
+import TimeSelects from './styled/main/time/TimeSelects.js'
+import Icon from './styled/shared/Icon.js'
 
-/**
- * @file Creates pre-chronos widgets and handle database updating related to them
- * @requires react
- */
+
 const PreChronos = ({
     setIsPreChronoClicked,
     setPreChronoSeconds,
@@ -30,7 +30,7 @@ const PreChronos = ({
         return (
             <span
                 key={hours + minutes + seconds}
-                className="pre-chronos-chip mdl-chip mdl-chip--deletable"
+                className="chip mdl-chip mdl-chip--deletable"
                 data-hours={hours}
                 data-minutes={minutes}
                 data-seconds={seconds}
@@ -46,12 +46,12 @@ const PreChronos = ({
                     className="mdl-chip__action"
                     data-role="deleteChip"
                 >
-                    <i
+                    <Icon
                         className="material-icons"
                         data-role="deleteChip"
                     >
                         cancel
-                    </i>
+                    </Icon>
                 </button>
             </span>
         )
@@ -247,19 +247,18 @@ const PreChronos = ({
 
     if (!userCred) return null
     return (
-        <div className={isDarkTheme ? "pre-chronos dark" : "pre-chronos"}>
-
-            <h5 className="pre-chronos-title">
+        <StyledPreChronos className={isDarkTheme ? "dark" : ""}>
+            <h5 className="title">
                 Save time by creating your chronos in advance !
-                <div id="info" className="icon material-icons">info</div>
+                <Icon id="info" className="material-icons">info</Icon>
                         <div className="mdl-tooltip" data-mdl-for="info">
                             5 max
                 </div>
             </h5>
 
-            <form className="pre-chronos-form" action="" onSubmit={pushPrechronoToDb}>
-                <div className="time_selects">
-                    <select className="time_select mdl-textfield__input" name="hours" id="hours">
+            <form className="form" onSubmit={pushPrechronoToDb}>
+                <TimeSelects>
+                    <select className="mdl-textfield__input" name="hours" id="hours">
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -287,7 +286,7 @@ const PreChronos = ({
                     </select>
                     <label htmlFor="hours">h</label>
 
-                    <select className="time_select mdl-textfield__input" name="minutes" id="minutes">
+                    <select className="mdl-textfield__input" name="minutes" id="minutes">
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -350,7 +349,7 @@ const PreChronos = ({
                         <option value="59">59</option>
                     </select>
                     <label htmlFor="minutes">min</label>
-                    <select className="time_select mdl-textfield__input" name="seconds" id="seconds">
+                    <select className="mdl-textfield__input" name="seconds" id="seconds">
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -413,19 +412,19 @@ const PreChronos = ({
                         <option value="59">59</option>
                     </select>
                     <label htmlFor="seconds">s</label>
-                </div>
+                </TimeSelects>
                 <div className="create-button-wrap">
-                    <button className="create-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Create</button>
+                    <button className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Create</button>
                 </div>
             </form>
 
-            <div className={isDarkTheme ? "pre-chronos-chips dark" : "pre-chronos-chips"} onClick={handleClick}>
+            <div className={isDarkTheme ? "chips dark" : "chips"} onClick={handleClick}>
                 {prechronos
                     ? prechronos.map(createChip)
                     : null
                 }
             </div>
-        </div>
+        </StyledPreChronos>
     )
 }
 

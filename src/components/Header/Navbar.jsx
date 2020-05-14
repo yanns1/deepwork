@@ -2,6 +2,9 @@ import React from 'react';
 import dialogPolyfill from 'dialog-polyfill';
 import { useAuthContext } from '../context/AuthContext.jsx';
 import { auth } from '../../scripts/init_firebase.js';
+import StyledNavbar from '../styled/header/StyledNavbar.js'
+import NavLink from '../styled/header/NavLink.js'
+import AccountIcon from '../styled/header/AccountIcon.js'
 
 const Navbar = () => {
     // Contexts
@@ -36,20 +39,20 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="navbar">
+        <StyledNavbar>
             {userCred
                 ?
                 <>
-                    <li className="nav-links logout-link" onClick={signOut}>Log out</li>
-                    <i className="material-icons account-icon" onClick={showAccountDialog} title="Account infos">account_circle</i>
+                    <NavLink onClick={signOut}>Log out</NavLink>
+                    <AccountIcon className="material-icons" onClick={showAccountDialog} title="Account infos">account_circle</AccountIcon>
                 </>
                 :
                 <>
-                    <li className="nav-links signup-link" onClick={showSignupDialog}>Sign up</li>
-                    <li className="nav-links login-link" onClick={showLoginDialog}>Log in</li>
+                    <NavLink onClick={showSignupDialog}>Sign up</NavLink>
+                    <NavLink onClick={showLoginDialog}>Log in</NavLink>
                 </>
             }
-        </nav>
+        </StyledNavbar>
     )
 }
 

@@ -1,10 +1,7 @@
 import React from 'react';
 import Label from "./Label.jsx"
+import TimeSelects from '../styled/main/time/TimeSelects.js'
 
-/**
- * @file Creates inputs for Chrono component
- * @requires react
- */
 const Input = ({
     label,
     setLabel,
@@ -34,14 +31,14 @@ const Input = ({
     }
 
     return (
-        <form action="" onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
             <Label
                 label={label}
                 setLabel={setLabel}
             />
 
-            <div className="time_selects">
-                <select className="time_select mdl-textfield__input" name="hours">
+            <TimeSelects>
+                <select className="mdl-textfield__input" name="hours">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -69,7 +66,7 @@ const Input = ({
                 </select>
                 <label htmlFor="hours">h</label>
 
-                <select className="time_select mdl-textfield__input" name="minutes">
+                <select className="mdl-textfield__input" name="minutes">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -132,7 +129,7 @@ const Input = ({
                     <option value="59">59</option>
                 </select>
                 <label htmlFor="minutes">min</label>
-                <select className="time_select mdl-textfield__input" name="seconds">
+                <select className="mdl-textfield__input" name="seconds">
                     <option value="0">0</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -195,7 +192,7 @@ const Input = ({
                     <option value="59">59</option>
                 </select>
                 <label htmlFor="seconds">s</label>
-            </div>
+            </TimeSelects>
 
             <div className="start-button-wrap">
                 <button className="start-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Start</button>

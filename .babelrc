@@ -1,7 +1,17 @@
 {
-  "presets": ["@babel/preset-env", "@babel/preset-react"],
   "plugins": [
+    [
+      "babel-plugin-styled-components",
+      {
+        "pure": true,
+        "displayName": true
+      }
+    ],
     "@babel/plugin-proposal-class-properties",
     "@babel/plugin-transform-runtime"
-  ]
+  ],
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react"
+  ],
 }

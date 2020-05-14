@@ -1,4 +1,4 @@
-import './styles/index.scss';
+import "./styles/normalize.css";
 import { enablePersistenceOfDb } from './scripts/init_firebase.js';
 import './scripts/init_font_awesome.js';
 import React from 'react';
