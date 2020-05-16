@@ -1,5 +1,4 @@
 import React from 'react';
-import dialogPolyfill from 'dialog-polyfill';
 import { useAuth } from '../context/AuthContext.jsx';
 import StyledNavbar from '../styled/header/StyledNavbar.js'
 import NavLink from '../styled/header/NavLink.js'

@@ -45,13 +45,6 @@ const GlobalStyles = createGlobalStyle`
         line-height: 1.4;
     }
 
-    /* Some fix */
-    .mdl-dialog__actions {
-    /* Overriding defaults */
-    justify-content: center;
-    padding-left: 8px;
-    }
-
 `
 
 export default GlobalStyles

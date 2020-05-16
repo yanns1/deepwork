@@ -37,7 +37,7 @@ const useProvideAuth = () => {
         return auth
             .signOut()
             .then(() => {
-                setUser(false);
+                setUser(null);
             });
     };
 
@@ -46,7 +46,7 @@ const useProvideAuth = () => {
             if (user) {
                 setUser(user);
             } else {
-                setUser(false);
+                setUser(null);
             }
         });
 
