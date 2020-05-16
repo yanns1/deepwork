@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useThemeContext } from './context/ThemeContext.jsx';
+import { useTheme } from './context/ThemeContext.jsx';
 import { useAuth } from './context/AuthContext.jsx';
 import { firebase, db } from '../scripts/init_firebase.js';
 import StyledPreChronos from './styled/main/time/StyledPreChronos.js'
@@ -15,7 +15,7 @@ const PreChronos = ({
 }) => {
     const [prechronos, setPrechronos] = useState(null)
 
-    const { isDarkTheme } = useThemeContext();
+    const { isDarkTheme } = useTheme();
     const { user } = useAuth();
 
     /**

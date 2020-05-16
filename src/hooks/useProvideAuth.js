@@ -4,6 +4,7 @@ import { auth, db } from '../scripts/init_firebase.js'
 const useProvideAuth = () => {
     const [user, setUser] = useState(null)
 
+    // catch possible errors in components
     const signin = (email, password) => {
         return auth
             .signInWithEmailAndPassword(email, password)
@@ -13,6 +14,7 @@ const useProvideAuth = () => {
             });
     };
 
+    // catch possible errors in components
     const signup = (email, password) => {
         return auth
             .createUserWithEmailAndPassword(email, password)

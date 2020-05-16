@@ -1,11 +1,11 @@
 import React from "react"
-import { useThemeContext } from '../context/ThemeContext.jsx'
+import { useTheme } from '../context/ThemeContext.jsx'
 import { useAuth } from '../context/AuthContext.jsx'
 import HeaderMess from '../styled/header/HeaderMess.js'
 
 
 const Message = () => {
-    const { isDarkTheme } = useThemeContext();
+    const { isDarkTheme } = useTheme();
     const { user } = useAuth();
 
     if (user) return null

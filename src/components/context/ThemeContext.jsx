@@ -47,6 +47,6 @@ const ThemeProvider = ({
     )
 }
 
-const useThemeContext = () => useContext(ThemeContext)
+const useTheme = () => useContext(ThemeContext)
 
-export { useThemeContext, ThemeProvider };
+export { useTheme, ThemeProvider };

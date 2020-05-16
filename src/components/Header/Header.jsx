@@ -1,6 +1,6 @@
 import React from 'react';
-import { useThemeContext } from '../context/ThemeContext.jsx';
-import Dialogs from './Dialogs.jsx';
+import { useTheme } from '../context/ThemeContext.jsx';
+import Dialogs from './dialogs/Dialogs.jsx';
 import Message from './Message.jsx';
 import Navbar from './Navbar.jsx';
 import ThemeToggle from './ThemeToggle.jsx';
@@ -9,7 +9,7 @@ import Title from '../styled/header/Title.js';
 
 
 const Header = () => {
-    const { isDarkTheme } = useThemeContext();
+    const { isDarkTheme } = useTheme();
 
     return (
         <header>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useThemeContext } from './context/ThemeContext.jsx';
+import { useTheme } from './context/ThemeContext.jsx';
 import MusicContainer from './styled/main/music/MusicContainer.js';
 import AudioContainer from './styled/main/music/AudioContainer.js';
 import VideoContainer from './styled/main/music/VideoContainer.js';
@@ -10,7 +10,7 @@ import Icon from './styled/shared/Icon.js'
 const Music = () => {
     const [videoUrl, setVideoUrl] = useState('');
     const [iframeUrl, setIframeUrl] = useState('');
-    const { isDarkTheme } = useThemeContext();
+    const { isDarkTheme } = useTheme();
 
     const handleChange = e => {
         const {name, value} = e.target;

@@ -1,13 +1,13 @@
 import React from 'react'
 import { useAuth } from '../context/AuthContext.jsx'
-import { useThemeContext } from '../context/ThemeContext.jsx'
+import { useTheme } from '../context/ThemeContext.jsx'
 import { db } from '../../scripts/init_firebase.js'
 import ThemeContainer from '../styled/header/ThemeContainer.js'
 import ThemeIcon from '../styled/header/ThemeIcon.js'
 
 const ThemeToggle = () => {
     const { user } = useAuth()
-    const { isDarkTheme, toggleTheme } = useThemeContext();
+    const { isDarkTheme, toggleTheme } = useTheme();
 
     // Add or remove 'dark' class to body
     const body = document.querySelector('body');
