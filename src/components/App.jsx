@@ -4,14 +4,10 @@ import Music from './Music.jsx';
 import Time from './Time.jsx';
 import Stats from './Stats.jsx';
 import Footer from './Footer.jsx';
-import { ThemeContextProvider } from './context/ThemeContext.jsx';
-import { AuthContextProvider } from './context/AuthContext.jsx';
+import { ThemeProvider } from './context/ThemeContext.jsx';
+import { AuthProvider } from './context/AuthContext.jsx';
 import GlobalStyles from './styled/GlobalStyles.js';
 
-/**
- * @file Returns the whole app by concatenating all components
- * @requires react
- */
 const App = () => {
     /**
      * Set window listeners
@@ -49,15 +45,15 @@ const App = () => {
     return (
         <>
             <GlobalStyles></GlobalStyles>
-            <AuthContextProvider>
-                <ThemeContextProvider>
+            <AuthProvider>
+                <ThemeProvider>
                     <Header />
                     <Music />
                     <Time />
                     <Stats />
                     <Footer />
-                </ThemeContextProvider>
-            </AuthContextProvider>
+                </ThemeProvider>
+            </AuthProvider>
         </>
     )
 }

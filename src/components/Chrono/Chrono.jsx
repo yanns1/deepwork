@@ -3,7 +3,7 @@ import { firebase, db } from '../../scripts/init_firebase.js';
 import Input from './Input.jsx';
 import Display from './Display.jsx';
 import Controls from './Controls.jsx';
-import { useAuthContext } from '../context/AuthContext.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
 
 
 const Chrono = ({
@@ -16,10 +16,8 @@ const Chrono = ({
     isFirstChronoRunning,
     setIsFirstChronoRunning
 }) => {
-    // Contexts
-    const userCred = useAuthContext();
+    const { user } = useAuth();
 
-    // States
     const [secondsLeft, setSecondsLeft] = useState(0);
     const [label, setLabel] = useState('');
     const [initChronoTime, setInitChronoTime] = useState(0);
@@ -33,7 +31,7 @@ const Chrono = ({
         let isLimitReached = true
 
         try {
-            const userDoc = await db.collection('users').doc(userCred.uid).get()
+            const userDoc = await db.collection('users').doc(user.uid).get()
             if (userDoc.exists) {
                 const labels = Object.keys(userDoc.data().stats)
                 if (labels.includes(labelToAdd) || labels.length < limit) {
@@ -56,7 +54,7 @@ const Chrono = ({
      * @param {number} timeToAdd - Time in seconds to add to label
      * @returns {Object} - null if update is successfull. Error object otherwise.
      */
-    const updateStatsInDb = (uid = userCred.uid, label, timeToAdd = 0) => {
+    const updateStatsInDb = (uid = user.uid, label, timeToAdd = 0) => {
         const userDoc = db.collection('users').doc(uid)
         const keyToUpdate = `stats.${label}`
         const updatedStats = {
@@ -112,7 +110,7 @@ const Chrono = ({
                     if (res) {
                         if (!await isLabelNumLimitReached(currentLabel)) {
                             console.log("passed here")
-                            const err = updateStatsInDb(userCred.uid, currentLabel, timeElapsedBeforeRestore)
+                            const err = updateStatsInDb(user.uid, currentLabel, timeElapsedBeforeRestore)
                             if (err) {
                                 console.error(`Error during updating stats: ${err}`)
                             }
@@ -174,7 +172,7 @@ const Chrono = ({
             if (currentLabel) {
 
                 const message = "from seconds"
-                const err = updateStatsInDb(userCred.uid, currentLabel, initChronoTime, message)
+                const err = updateStatsInDb(user.uid, currentLabel, initChronoTime, message)
                 if (err) {
                     console.error(`Error during updating stats: ${err}`)
                 }

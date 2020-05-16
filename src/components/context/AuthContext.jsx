@@ -1,33 +1,20 @@
-import React, { useState, useContext, useMemo } from 'react';
-import { auth } from '../../scripts/init_firebase.js';
-const AuthContext = React.createContext();
+import React, { useContext, useMemo, createContext } from 'react';
+import useProvideAuth from '../../hooks/useProvideAuth.js';
 
-/**
- * @file Initiates the authentification context
- * @requires react
- */
-const AuthContextProvider = ({
-    children,
-    initialState = null
-}) => {
-    const [userCred, setUserCred] = useState(initialState);
+const AuthContext = createContext();
 
-    auth.onAuthStateChanged(userCred => {
-        setUserCred(() => userCred)
-    });
+const AuthProvider = ({ children }) => {
+    const auth = useProvideAuth()
 
-    // Optimize perf
-    const contextValue = useMemo(() => userCred, [userCred])
+    const contextValue = useMemo(() => auth, [auth])
 
     return (
-        <AuthContext.Provider
-            value={contextValue}
-        >
+        <AuthContext.Provider value={contextValue}>
             {children}
         </AuthContext.Provider>
     )
 }
 
-const useAuthContext = () => useContext(AuthContext)
+const useAuth = () => useContext(AuthContext)
 
-export { useAuthContext, AuthContextProvider }
+export { useAuth, AuthProvider }

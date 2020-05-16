@@ -1,17 +1,14 @@
 import React, { useState, useEffect, useContext, useMemo } from 'react';
-import { useAuthContext } from '../context/AuthContext.jsx'
+import { useAuth } from '../context/AuthContext.jsx'
 import  { db } from '../../scripts/init_firebase.js'
 const ThemeContext = React.createContext();
 
-/**
- * @file Initiates the theme context
- * @requires react
- */
-const ThemeContextProvider = ({
+
+const ThemeProvider = ({
     children,
     initialState = true
 }) => {
-    const userCred = useAuthContext()
+    const { user } = useAuth();
 
     const [isDarkTheme, setIsDarkTheme] = useState(initialState);
 
@@ -29,17 +26,17 @@ const ThemeContextProvider = ({
      * Set listener for changes in db and set theme state accordingly to response.
      */
     useEffect(() => {
-        if (!userCred) return
+        if (!user) return
 
-        const usersDocRef = db.collection('users').doc(userCred.uid)
+        const usersDocRef = db.collection('users').doc(user.uid)
         const unsubscribe = usersDocRef.onSnapshot(doc => {
-            setIsDarkTheme(() => doc.data().isDarkTheme)
+            setIsDarkTheme(doc.data().isDarkTheme)
         })
 
         return () => {
             unsubscribe()
         }
-    }, [userCred])
+    }, [user])
 
     return (
         <ThemeContext.Provider
@@ -52,4 +49,4 @@ const ThemeContextProvider = ({
 
 const useThemeContext = () => useContext(ThemeContext)
 
-export { useThemeContext, ThemeContextProvider };
+export { useThemeContext, ThemeProvider };

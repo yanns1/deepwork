@@ -1,14 +1,12 @@
 import React from 'react';
 import dialogPolyfill from 'dialog-polyfill';
-import { useAuthContext } from '../context/AuthContext.jsx';
-import { auth } from '../../scripts/init_firebase.js';
+import { useAuth } from '../context/AuthContext.jsx';
 import StyledNavbar from '../styled/header/StyledNavbar.js'
 import NavLink from '../styled/header/NavLink.js'
 import AccountIcon from '../styled/header/AccountIcon.js'
 
 const Navbar = () => {
-    // Contexts
-    const userCred = useAuthContext()
+    const { user, signout } = useAuth();
 
     const showSignupDialog = () => {
         const signupDialog = document.querySelector('.signup-dialog');
@@ -34,16 +32,12 @@ const Navbar = () => {
         accountDialog.showModal();
     }
 
-    const signOut = () => {
-        auth.signOut();
-    }
-
     return (
         <StyledNavbar>
-            {userCred
+            {user
                 ?
                 <>
-                    <NavLink onClick={signOut}>Log out</NavLink>
+                    <NavLink onClick={signout}>Log out</NavLink>
                     <AccountIcon className="material-icons" onClick={showAccountDialog} title="Account infos">account_circle</AccountIcon>
                 </>
                 :

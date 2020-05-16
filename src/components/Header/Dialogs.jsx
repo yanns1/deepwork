@@ -1,28 +1,22 @@
 import React, { useState, useEffect } from 'react'
-import { useAuthContext } from '../context/AuthContext.jsx'
-import { auth, db } from '../../scripts/init_firebase.js';
+import { useAuth } from '../context/AuthContext.jsx'
+import { db } from '../../scripts/init_firebase.js';
 import ErrorMess from '../styled/header/ErrorMess.js'
 
 const Dialogs = () => {
     const [signupErrMess, setSignupErrMess] = useState('')
     const [loginErrMess, setLoginErrMess] = useState('')
-    const userCred = useAuthContext()
+    const { user, signin, signup } = useAuth();
 
-    const signUp = async e => {
+    const handleSignup = async e => {
         e.preventDefault();
         const signupForm = e.target;
         const email = signupForm['signup-email'].value;
         const password = signupForm['signup-pwd'].value;
 
-        // sign up user
-        auth.createUserWithEmailAndPassword(email, password)
-            .then(cred => {
+        signup(email, password)
+            .then(() => {
                 closeDialogs()
-                // Initialize document in db for user
-                db.collection('users').doc(cred.user.uid).set({
-                    "pre-chronos": [],
-                    "stats": {}
-                })
             })
             .catch(err => {
                 setSignupErrMess(err.message)
@@ -30,17 +24,14 @@ const Dialogs = () => {
             })
     }
 
-    const logIn = e => {
+    const handleLogin = e => {
         e.preventDefault();
-
         const loginForm = e.target;
         const email = loginForm['login-email'].value;
         const password = loginForm['login-pwd'].value;
 
-        // log in user
-        auth.signInWithEmailAndPassword(email, password)
+        signin(email, password)
             .then(() => {
-                // close modal and reset form
                 closeDialogs();
             })
             .catch(err => {
@@ -83,12 +74,12 @@ const Dialogs = () => {
 
     return (
         <>
-            {userCred
+            {user
                 ?
                 <dialog className="account-dialog mdl-dialog">
                     <h4 className="mdl-dialog__title">Account</h4>
                     <div className="mdl-dialog__content">
-                        <p><b>Email:</b> {userCred.email}</p>
+                        <p><b>Email:</b> {user.email}</p>
                         <button
                             className="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
                             type="button"
@@ -101,7 +92,7 @@ const Dialogs = () => {
                     <dialog className="signup-dialog mdl-dialog">
                         <h4 className="mdl-dialog__title">Sign up</h4>
                         <div className="mdl-dialog__content">
-                            <form className="signup-form" onSubmit={signUp}>
+                            <form className="signup-form" onSubmit={handleSignup}>
                                 <div
                                     className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
                                 >
@@ -148,7 +139,7 @@ const Dialogs = () => {
                     <dialog className="login-dialog mdl-dialog">
                         <h4 className="mdl-dialog__title">Log in</h4>
                         <div className="mdl-dialog__content">
-                            <form className="login-form" onSubmit={logIn}>
+                            <form className="login-form" onSubmit={handleLogin}>
                                 <div
                                     className="mdl-textfield mdl-js-textfield mdl-textfield--floating-label"
                                 >

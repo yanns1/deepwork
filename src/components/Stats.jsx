@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { useAuthContext } from './context/AuthContext.jsx'
+import { useAuth } from './context/AuthContext.jsx'
 import { db } from '../scripts/init_firebase.js';
 import StyledStats from './styled/main/stats/StyledStats.js';
 import DeleteLabelsForm from './styled/main/stats/DeleteLabelsForm.js';
 
 const Stats = () => {
-    const userCred = useAuthContext()
-
+    const { user } = useAuth()
     /**
      * State for stats
      * (make sure that's initialized to an empty array in order to allow calling keys() and values() on it, even when database has not responded yet, which is the case at reload)
@@ -39,7 +38,7 @@ const Stats = () => {
                 .filter(isNotChecked)
                 .map(getName)
 
-            const userDocRef = db.collection("users").doc(userCred.uid)
+            const userDocRef = db.collection("users").doc(user.uid)
             db.runTransaction(transaction => {
                 return transaction.get(userDocRef).then(userDoc => {
                     if (!userDoc.exists) {
@@ -77,7 +76,7 @@ const Stats = () => {
      * @returns {Object} - unsubscribe to listener function
      */
     const getStats = () => {
-        const usersDocRef = db.collection('users').doc(userCred.uid)
+        const usersDocRef = db.collection('users').doc(user.uid)
         const unsubscribe = usersDocRef.onSnapshot(doc => {
             // Create Map obj to ensure insertion order
             const stats = objToMap(doc.data().stats)
@@ -92,7 +91,7 @@ const Stats = () => {
      * @param {array} data - Value of each label (labels[0] goes with data[0] etc)
      */
     const createChart = (labels, data) => {
-        if (userCred) {
+        if (user) {
             const canvas = document.querySelector('#chart');
             const ctx = canvas.getContext('2d');
 
@@ -154,14 +153,14 @@ const Stats = () => {
      * useEffect that get and set stats state when changes occur in database
      */
     useEffect(() => {
-        if (!userCred) return
+        if (!user) return
 
         const unsubscribe = getStats()
 
         return () => {
             unsubscribe()
         }
-    }, [userCred])
+    }, [user])
 
     /**
      * Create Chart right after first render and when stats change.
@@ -185,7 +184,7 @@ const Stats = () => {
         componentHandler.upgradeDom()
     })
 
-    if (!userCred) return null
+    if (!user) return null
     const checkboxesJsx = createDeleteCheckboxes(Array.from(stats.keys()))
     return (
         <StyledStats>

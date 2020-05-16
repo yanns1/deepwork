@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useThemeContext } from './context/ThemeContext.jsx';
-import { useAuthContext } from './context/AuthContext.jsx';
+import { useAuth } from './context/AuthContext.jsx';
 import { firebase, db } from '../scripts/init_firebase.js';
 import StyledPreChronos from './styled/main/time/StyledPreChronos.js'
 import TimeSelects from './styled/main/time/TimeSelects.js'
@@ -13,12 +13,10 @@ const PreChronos = ({
     setPreChronoLabel,
     convertIntoSeconds
 }) => {
-    // States
     const [prechronos, setPrechronos] = useState(null)
 
-    // Contexts
     const { isDarkTheme } = useThemeContext();
-    const userCred = useAuthContext();
+    const { user } = useAuth();
 
     /**
      * Create a chip given the hours, minutes and seconds
@@ -133,7 +131,7 @@ const PreChronos = ({
      * @returns {void}
      */
     const deleteChip = ({ hours, minutes, seconds }) => {
-        const userDocRef = db.collection("users").doc(userCred.uid)
+        const userDocRef = db.collection("users").doc(user.uid)
         db.runTransaction(transaction => {
             return transaction.get(userDocRef).then(userDoc => {
                 if (!userDoc.exists) {
@@ -159,7 +157,7 @@ const PreChronos = ({
         const isSelect = el => el.tagName === "SELECT"
         const selectElements = Array.from(form.elements).filter(isSelect)
 
-        const userDocRef = db.collection("users").doc(userCred.uid)
+        const userDocRef = db.collection("users").doc(user.uid)
         db.runTransaction(transaction => {
             return transaction.get(userDocRef).then(userDoc => {
                 if (!userDoc.exists) {
@@ -208,7 +206,7 @@ const PreChronos = ({
      * @returns {Object} - unsubscribe to listener function
      */
     const getPrechronos = () => {
-        const usersDocRef = db.collection('users').doc(userCred.uid)
+        const usersDocRef = db.collection('users').doc(user.uid)
         const unsubscribe = usersDocRef.onSnapshot(doc => {
             const prechronos = doc.data()["pre-chronos"]
             setPrechronos(() => prechronos)
@@ -221,14 +219,14 @@ const PreChronos = ({
      * useEffect that get and set prechronos state when changes occur in database
      */
     useEffect(() => {
-        if (!userCred) return
+        if (!user) return
 
         const unsubscribe = getPrechronos()
 
         return () => {
             unsubscribe()
         }
-    }, [userCred])
+    }, [user])
 
     /**
      * Create prechronos chips at first render if user is logged in
@@ -245,7 +243,7 @@ const PreChronos = ({
         componentHandler.upgradeDom()
     })
 
-    if (!userCred) return null
+    if (!user) return null
     return (
         <StyledPreChronos className={isDarkTheme ? "dark" : ""}>
             <h5 className="title">
