@@ -3,12 +3,18 @@ import { getEl } from '../../../scripts/utils.js';
 import { useAuth } from '../../context/AuthContext.jsx'
 import { useDialog } from '../../context/DialogContext.jsx'
 import useClickOutside from '../../../hooks/useClickOutside.js';
+import useKeyPress from '../../../hooks/useKeyPress.js';
 import ErrorMess from '../../styled/header/ErrorMess.js'
 
 const LoginDialog = () => {
     const [loginErrMess, setLoginErrMess] = useState('')
     const { user, signin } = useAuth();
     const { loginDialog: { close } } = useDialog()
+
+    const isEscapePressed = useKeyPress('Escape')
+    if (isEscapePressed) {
+        close()
+    }
 
     const dialogRef = useRef()
     const closeDialog = () => {

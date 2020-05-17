@@ -2,10 +2,16 @@ import React, { useRef } from 'react'
 import { useAuth } from '../../context/AuthContext.jsx'
 import { useDialog } from '../../context/DialogContext.jsx'
 import useClickOutside from '../../../hooks/useClickOutside.js';
+import useKeyPress from '../../../hooks/useKeyPress.js';
 
 const AccountDialog = () => {
     const { user } = useAuth();
     const { accountDialog: { close } } = useDialog()
+
+    const isEscapePressed = useKeyPress('Escape')
+    if (isEscapePressed) {
+        close()
+    }
 
     const dialogRef = useRef()
     useClickOutside(dialogRef, close)
