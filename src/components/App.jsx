@@ -6,8 +6,8 @@ import Stats from './Stats.jsx';
 import Footer from './Footer.jsx';
 import { ThemeProvider } from './context/ThemeContext.jsx';
 import { AuthProvider } from './context/AuthContext.jsx';
-import GlobalStyles from './styled/GlobalStyles.js';
 import { DialogProvider } from './context/DialogContext.jsx';
+import GlobalStyles from './styled/GlobalStyles.js';
 
 const App = () => {
     /**

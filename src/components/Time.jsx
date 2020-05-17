@@ -11,15 +11,6 @@ const Time = () => {
     const [preChronoLabel, setPreChronoLabel ] = useState('');
     const [isFirstChronoRunning, setIsFirstChronoRunning ] = useState(false);
 
-    const convertIntoSeconds = ({ hours, minutes, seconds }) => {
-        let secondsTotal = 0;
-        secondsTotal += parseInt(hours) * 3600;
-        secondsTotal += parseInt(minutes) * 60;
-        secondsTotal += parseInt(seconds);
-
-        return secondsTotal;
-    }
-
     return (
         <>
             <CurrentTime></CurrentTime>
@@ -31,7 +22,6 @@ const Time = () => {
                     preChronoSeconds={preChronoSeconds}
                     preChronoLabel={preChronoLabel}
                     setPreChronoLabel={setPreChronoLabel}
-                    convertIntoSeconds={convertIntoSeconds}
                     isFirstChronoRunning={isFirstChronoRunning}
                     setIsFirstChronoRunning={setIsFirstChronoRunning}
                 />
@@ -42,7 +32,6 @@ const Time = () => {
                     preChronoSeconds={preChronoSeconds}
                     preChronoLabel={preChronoLabel}
                     setPreChronoLabel={setPreChronoLabel}
-                    convertIntoSeconds={convertIntoSeconds}
                     isFirstChronoRunning={isFirstChronoRunning}
                     setIsFirstChronoRunning={setIsFirstChronoRunning}
                 />
@@ -51,7 +40,6 @@ const Time = () => {
                 setIsPreChronoClicked={setIsPreChronoClicked}
                 setPreChronoSeconds={setPreChronoSeconds}
                 setPreChronoLabel={setPreChronoLabel}
-                convertIntoSeconds={convertIntoSeconds}
             />
         </>
     )

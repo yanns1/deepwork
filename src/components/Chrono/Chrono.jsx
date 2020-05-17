@@ -12,7 +12,6 @@ const Chrono = ({
     preChronoSeconds,
     preChronoLabel,
     setPreChronoLabel,
-    convertIntoSeconds,
     isFirstChronoRunning,
     setIsFirstChronoRunning
 }) => {
@@ -69,8 +68,7 @@ const Chrono = ({
     }
 
     /**
-     * Play the congratulations music and set a event listener on keydown for pausing the music
-     * (Setting the event listener seems to trigger a re-render of the component, and unexpectedly setSeconds becomes -1 whereas setTimeout doesn't run on that re-render because setSeconds == 0 at that moment)
+     * Play the congratulations music
      */
     const playCongratulationsMusic = () => {
         const congratulations = document.querySelector('.congratulations-music');
@@ -213,7 +211,7 @@ const Chrono = ({
         } else {
             // Filter the 'first' Chrono component
             // If the 2 chronos are running, the chrono 2 will be
-            // override if a new prechrono is launched
+            // overriden if a new prechrono is launched
             if (chronoID === 'second') {
                 if (preChronoSeconds > 0) {
                     setSecondsLeft(() => preChronoSeconds);
@@ -230,7 +228,6 @@ const Chrono = ({
                 setLabel={setLabel}
                 setInitChronoTime={setInitChronoTime}
                 setSecondsLeft={setSecondsLeft}
-                convertIntoSeconds={convertIntoSeconds}
             />
             <Display
                 secondsLeft={secondsLeft}

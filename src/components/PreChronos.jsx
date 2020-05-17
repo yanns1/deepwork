@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useTheme } from './context/ThemeContext.jsx';
 import { useAuth } from './context/AuthContext.jsx';
 import { firebase, db } from '../scripts/init_firebase.js';
+import { convertIntoSeconds, displayTime } from '../scripts/utils.js';
 import StyledPreChronos from './styled/main/time/StyledPreChronos.js'
 import TimeSelects from './styled/main/time/TimeSelects.js'
 import Icon from './styled/shared/Icon.js'
@@ -11,7 +12,6 @@ const PreChronos = ({
     setIsPreChronoClicked,
     setPreChronoSeconds,
     setPreChronoLabel,
-    convertIntoSeconds
 }) => {
     const [prechronos, setPrechronos] = useState(null)
 
@@ -24,7 +24,7 @@ const PreChronos = ({
      * @returns {JSX} - JSX for a chip
      */
     const createChip = ({ hours, minutes, seconds }) => {
-        const chronoText = createChronoText({ hours, minutes, seconds });
+        const chronoText = displayTime({ hours, minutes, seconds }, ['', '']);
         return (
             <span
                 key={hours + minutes + seconds}
@@ -56,48 +56,6 @@ const PreChronos = ({
     }
 
     /**
-     * Create chrono text given the hours, minutes and seconds
-     * (Same function that in Display.jsx but without intervals)
-     * @param {Object} prechrono Prechrono obj, i.e with keys hours, minutes and seconds
-     * @returns {String} - Chrono text
-     */
-    const createChronoText = ({ hours, minutes, seconds }) => {
-        // stringToInt :: String -> Int || NaN
-        const stringToInt = string => parseInt(string, 10)
-        const [h, min, s] = [hours, minutes, seconds].map(stringToInt)
-
-        const hoursText = h ? `${h}h` : '';
-        let minutesText = '';
-        let secondsText = '';
-
-        if (hoursText) {
-            if (min < 10) {
-                minutesText = `0${min}min`;
-            } else {
-                minutesText = `${min}min`;
-            }
-        } else {
-            if (min === 0) {
-                minutesText = '';
-            } else {
-                minutesText = `${min}min`;
-            }
-        }
-
-        if (minutesText) {
-            if (s < 10) {
-                secondsText = `0${s}s`;
-            } else {
-                secondsText = `${s}s`;
-            }
-        } else {
-            secondsText = `${s}s`;
-        }
-
-        return hoursText + minutesText + secondsText
-    }
-
-    /**
      * Modify states (preChronoSeconds, isPreChronoClicked, preChronoLabel) accordingly which lauchs the prechrono
      * @param {Object} prechrono - Prechrono obj (from chipWrapper dataset)
      * @returns {void}
@@ -107,7 +65,7 @@ const PreChronos = ({
         const label = window.prompt(`Choose your label:\n(Only lowercases and underscores are valid. Don't let white spaces ! If those conditions are not respected, the label will not be considered.)`)
 
         // Different from "!label", because label can be an empty string
-        if (label == null) return
+        if (label === null) return
 
         // Start prechrono
         setPreChronoSeconds(() => convertIntoSeconds({ hours, minutes, seconds }))

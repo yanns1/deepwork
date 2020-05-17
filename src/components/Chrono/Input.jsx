@@ -1,13 +1,13 @@
 import React from 'react';
 import Label from "./Label.jsx"
+import { convertIntoSeconds } from '../../scripts/utils.js'
 import TimeSelects from '../styled/main/time/TimeSelects.js'
 
 const Input = ({
     label,
     setLabel,
     setInitChronoTime,
-    setSecondsLeft,
-    convertIntoSeconds
+    setSecondsLeft
 }) => {
     /**
      * Modify states (secondsLeft, initChronoTime) which lauchs the chrono
